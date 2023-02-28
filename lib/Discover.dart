@@ -39,34 +39,6 @@ class _DiscoverState extends State<Discover> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: BottomNavigationBar(
-      //   selectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
-      //   selectedItemColor: Colors.grey[800],
-      //   unselectedIconTheme: IconThemeData(
-      //     color: Colors.grey[400],
-      //   ),
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: ImageIcon(AssetImage('assets/icons/lotus.png')),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.search),
-      //       label: 'Discover',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.person_outline),
-      //       label: 'Profile',
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   onTap: (int index) {
-      //     _pageController.animateToPage(index,
-      //         duration: Duration(microseconds: 1000), curve: Curves.easeIn);
-      //   },
-      // ),
-
-      drawer: Drawer(),
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();

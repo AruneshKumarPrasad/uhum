@@ -69,6 +69,11 @@ flutter:
     - assets/Home/images1/
     - assets/Home/images2/
     - assets/Home/images3/
+    - assets/Discover/images/
+    - assets/Discover/icons/
+    - assets/Discover/images1/
+    - assets/Discover/images2/
+    - assets/Discover/images3/
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

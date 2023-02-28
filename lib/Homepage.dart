@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uhum/Discover.dart';
 
 class Main_page_view extends StatefulWidget {
   const Main_page_view({super.key});
@@ -48,7 +49,7 @@ class _Main_page_viewState extends State<Main_page_view> {
       drawer: Drawer(),
       body: PageView(
         controller: _pageController,
-        children: [Homepage()],
+        children: [Homepage(),Discover()],
         onPageChanged: (index) {
           onPageChange(index);
         },
@@ -114,68 +115,6 @@ class _HomepageState extends State<Homepage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: Container(
-      //   decoration: BoxDecoration(
-      //     color: Colors.white,
-      //     borderRadius: BorderRadius.circular(25),
-      //   ),
-      //   child: Padding(
-      //     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-      //     child: GNav(
-      //       selectedIndex: _selectedIndex,
-      //       gap: 8,
-      //       backgroundColor: Colors.white,
-      //       color: Colors.black,
-      //       activeColor: Colors.white,
-      //       tabBackgroundColor: Colors.grey.shade300,
-      //       padding: EdgeInsets.all(16),
-      //       tabs: [
-      //         GButton(
-      //           icon: LineIcons.home,
-      //           text: 'Home',
-      //         ),
-      //         GButton(
-      //           icon: LineIcons.search,
-      //         ),
-      //         GButton(
-      //           icon: LineIcons.user,
-      //         ),
-      //       ],
-      //       onTabChange: (int index) {
-      //         _pageController.animateToPage(index,
-      //             duration: Duration(microseconds: 1000), curve: Curves.easeIn);
-      //       },
-      //     ),
-      //   ),
-      // ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
-        selectedItemColor: Colors.grey[800],
-        unselectedIconTheme: IconThemeData(
-          color: Colors.grey[400],
-        ),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage('assets/icons/lotus.png')),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Discover',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: (int index) {
-          _pageController.animateToPage(index,
-              duration: Duration(microseconds: 1000), curve: Curves.easeIn);
-        },
-      ),
-
-      drawer: Drawer(),
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
@@ -268,18 +207,7 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ],
                         ),
-                        // Row(
-                        //   children: [
-                        //     Text(
-                        //       'Limited seats available',
-                        //       textAlign: TextAlign.start,
-                        //       style: GoogleFonts.poppins(
-                        //           textStyle: TextStyle(
-                        //               fontSize: 9,
-                        //               fontWeight: FontWeight.w600)),
-                        //     ),
-                        //   ],
-                        // ),
+                       
                       ],
                     ),
                   ],
@@ -349,36 +277,7 @@ class _HomepageState extends State<Homepage> {
                             fontSize: 15,
                           ),
                         ),
-                        // child: Padding(
-                        //   padding: const EdgeInsets.only(left: 5, top: 5),
-                        //   child: Container(
-                        //     decoration: BoxDecoration(
-                        //       border: Border.all(color: Colors.black),
-                        //       borderRadius: BorderRadius.circular(10),
-                        //     ),
-                        // child: TextFormField(
-                        //   autocorrect: false,
-                        //   keyboardType: TextInputType.emailAddress,
-                        //   decoration: InputDecoration(
-                        //     border: InputBorder.none,
-                        //     prefixIcon: Icon(Icons.search_outlined),
-                        //     suffixIcon: GestureDetector(
-                        //       onTap: () {},
-                        //       child: Padding(
-                        //         padding: const EdgeInsets.all(8.0),
-                        //         child: Image.asset(
-                        //           'assets/icons/filter.png',
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     hintText: 'Search',
-                        //     labelStyle: TextStyle(
-                        //       fontSize: 20,
-                        //     ),
-                        //   ),
-                        // ),
-                        //   ),
-                        // ),
+                       
                       ),
                       SizedBox(
                         height: 10,
@@ -421,18 +320,7 @@ class _HomepageState extends State<Homepage> {
                                               color: Colors.grey[100]),
                                         ),
                                       ),
-                                      // SizedBox(
-                                      //   width: 130,
-                                      //   child: Text(
-                                      //     subtitles1[index],
-                                      //     style: GoogleFonts.poppins(
-                                      //       textStyle: TextStyle(
-                                      //           fontSize: 10,
-                                      //           fontWeight: FontWeight.w500,
-                                      //           color: Colors.grey[100]),
-                                      //     ),
-                                      //   ),
-                                      // ),
+                                      
                                     ],
                                   ),
                                 ),
@@ -554,96 +442,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 100.0,
-                      //   child: ListView.builder(
-                      //     physics: ClampingScrollPhysics(),
-                      //     shrinkWrap: true,
-                      //     scrollDirection: Axis.horizontal,
-                      //     itemCount: images3.length,
-                      //     itemBuilder: (BuildContext context, int index) =>
-                      //         Card(
-                      //       color: Colors.grey[900],
-                      //       shape: RoundedRectangleBorder(
-                      //           borderRadius: BorderRadius.circular(15)),
-                      //       child: GestureDetector(
-                      //         onTap: () {},
-                      //         child: Container(
-                      //           alignment: Alignment.center,
-                      //           margin: EdgeInsets.all(10),
-                      //           width: 80,
-                      //           height: 110,
-                      //           decoration: BoxDecoration(
-                      //             borderRadius: BorderRadius.circular(15),
-                      //             image: DecorationImage(
-                      //                 image: AssetImage(images3[index]),
-                      //                 fit: BoxFit.cover),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 100.0,
-                      //   child: ListView.builder(
-                      //     physics: ClampingScrollPhysics(),
-                      //     shrinkWrap: true,
-                      //     scrollDirection: Axis.horizontal,
-                      //     itemCount: images3.length,
-                      //     itemBuilder: (BuildContext context, int index) =>
-                      //         Card(
-                      //       color: Colors.grey[900],
-                      //       shape: RoundedRectangleBorder(
-                      //           borderRadius: BorderRadius.circular(15)),
-                      //       child: GestureDetector(
-                      //         onTap: () {},
-                      //         child: Container(
-                      //           alignment: Alignment.center,
-                      //           margin: EdgeInsets.all(10),
-                      //           width: 80,
-                      //           height: 110,
-                      //           decoration: BoxDecoration(
-                      //             borderRadius: BorderRadius.circular(15),
-                      //             image: DecorationImage(
-                      //                 image: AssetImage(images3[index]),
-                      //                 fit: BoxFit.cover),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 100.0,
-                      //   child: ListView.builder(
-                      //     physics: ClampingScrollPhysics(),
-                      //     shrinkWrap: true,
-                      //     scrollDirection: Axis.horizontal,
-                      //     itemCount: images3.length,
-                      //     itemBuilder: (BuildContext context, int index) =>
-                      //         Card(
-                      //       color: Colors.grey[900],
-                      //       shape: RoundedRectangleBorder(
-                      //           borderRadius: BorderRadius.circular(15)),
-                      //       child: GestureDetector(
-                      //         onTap: () {},
-                      //         child: Container(
-                      //           alignment: Alignment.center,
-                      //           margin: EdgeInsets.all(10),
-                      //           width: 80,
-                      //           height: 110,
-                      //           decoration: BoxDecoration(
-                      //             borderRadius: BorderRadius.circular(15),
-                      //             image: DecorationImage(
-                      //                 image: AssetImage(images3[index]),
-                      //                 fit: BoxFit.cover),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                     
                     ],
                   ),
                 );
