@@ -15,18 +15,18 @@ class _DiscoverState extends State<Discover> {
   int counter = 0;
 
   final List<String> images1 = <String>[
-    'assets/images1/flower.png',
-    'assets/images1/flower.png',
+    'assets/Discover/images1/flower.png',
+    'assets/Discover/images1/flower.png',
   ];
   final List<String> images2 = <String>[
-    'assets/images2/uhum_logo.png',
-    'assets/images2/uhum_logo.png',
-    'assets/images2/uhum_logo.png',
+    'assets/Discover/images2/uhum_logo.png',
+    'assets/Discover/images2/uhum_logo.png',
+    'assets/Discover/images2/uhum_logo.png',
   ];
   final List<String> images3 = <String>[
-    'assets/images3/uhum_logo.png',
-    'assets/images3/uhum_logo.png',
-    'assets/images3/uhum_logo.png',
+    'assets/Discover/images3/uhum_logo.png',
+    'assets/Discover/images3/uhum_logo.png',
+    'assets/Discover/images3/uhum_logo.png',
   ];
   final List<String> titles1 = <String>['Live Sessions', 'Meditation'];
   final List<String> subtitles1 = <String>[
@@ -63,7 +63,7 @@ class _DiscoverState extends State<Discover> {
                     bottomRight: Radius.circular(25.0),
                   ),
                   child: Image.asset(
-                    'assets/images/appbar_image.png',
+                    'assets/Discover/images/appbar_image.png',
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -223,7 +223,7 @@ class _DiscoverState extends State<Discover> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Image.asset(
-                                      'assets/icons/filter.png',
+                                      'assets/Discover/icons/filter.png',
                                     ),
                                   ),
                                 ),

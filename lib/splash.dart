@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:uhum/Homepage.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -197,10 +198,10 @@ class _SplashPageState extends State<SplashPage> {
                     ),
                     label: const Icon(Icons.arrow_forward),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Notificationallow()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const Notificationallow()));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
@@ -334,7 +335,7 @@ class Notificationallow extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Notificationallow()));
+                              builder: (context) => const Homepage()));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:

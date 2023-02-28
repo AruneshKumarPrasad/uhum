@@ -28,7 +28,7 @@ class _Main_page_viewState extends State<Main_page_view> {
         ),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage('assets/icons/lotus.png')),
+            icon: ImageIcon(AssetImage('assets/Home/icons/lotus.png')),
             label: 'Home',
           ),
           BottomNavigationBarItem(
@@ -41,10 +41,7 @@ class _Main_page_viewState extends State<Main_page_view> {
           ),
         ],
         currentIndex: _selectedIndex,
-        onTap: (int index) {
-          _pageController.animateToPage(index,
-              duration: Duration(microseconds: 1000), curve: Curves.easeIn);
-        },
+        
       ),
       drawer: Drawer(),
       body: PageView(
@@ -75,19 +72,19 @@ class _HomepageState extends State<Homepage> {
   int counter = 0;
 
   final List<String> images1 = <String>[
-    'assets/images1/UHUM_kids.jpeg',
-    'assets/images1/flower.png',
-    'assets/images1/flower.png',
-    'assets/images1/flower.png',
-    'assets/images1/flower.png',
+    'assets/Home/images1/UHUM_kids.jpeg',
+    'assets/Home/images1/flower.png',
+    'assets/Home/images1/flower.png',
+    'assets/Home/images1/flower.png',
+    'assets/Home/images1/flower.png',
   ];
   final List<String> images2 = <String>[
-    'assets/images2/man.jpeg',
-    'assets/images2/leave.jpeg',
+    'assets/Home/images2/man.jpeg',
+    'assets/Home/images2/leave.jpeg',
   ];
   final List<String> images3 = <String>[
-    'assets/images3/flowers.jpeg',
-    'assets/images3/green.jpeg',
+    'assets/Home/images3/flowers.jpeg',
+    'assets/Home/images3/green.jpeg',
   ];
   final List<String> titles1 = <String>[
     'UHUM kids',
@@ -139,7 +136,7 @@ class _HomepageState extends State<Homepage> {
                     bottomRight: Radius.circular(25.0),
                   ),
                   child: Image.asset(
-                    'assets/images/appbar_image.jpeg',
+                    'assets/Home/images/appbar_image.jpeg',
                     fit: BoxFit.fill,
                   ),
                 ),
