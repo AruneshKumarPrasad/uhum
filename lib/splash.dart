@@ -330,7 +330,12 @@ class Notificationallow extends StatelessWidget {
                   width: 250,
                   height: 40,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Notificationallow()));
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
                             const Color.fromARGB(255, 80, 163, 246),
