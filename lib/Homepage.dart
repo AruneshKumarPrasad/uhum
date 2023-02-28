@@ -5,6 +5,64 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class Main_page_view extends StatefulWidget {
+  const Main_page_view({super.key});
+
+  @override
+  State<Main_page_view> createState() => _Main_page_viewState();
+}
+
+class _Main_page_viewState extends State<Main_page_view> {
+  int _selectedIndex = 0;
+  PageController _pageController = PageController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
+        selectedItemColor: Colors.grey[800],
+        unselectedIconTheme: IconThemeData(
+          color: Colors.grey[400],
+        ),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage('assets/icons/lotus.png')),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Discover',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: (int index) {
+          _pageController.animateToPage(index,
+              duration: Duration(microseconds: 1000), curve: Curves.easeIn);
+        },
+      ),
+      drawer: Drawer(),
+      body: PageView(
+        controller: _pageController,
+        children: [Homepage()],
+        onPageChanged: (index) {
+          onPageChange(index);
+        },
+      ),
+    );
+  }
+
+  onPageChange(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+}
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
