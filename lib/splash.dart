@@ -15,7 +15,8 @@ class _SplashPageState extends State<SplashPage> {
   final _controller = PageController();
   @override
   Widget build(BuildContext context) {
-    precacheImage(const AssetImage("assets/Splash/images/android.png"), context);
+    precacheImage(
+        const AssetImage("assets/Splash/images/android.png"), context);
     return Scaffold(
         body: Stack(
       children: [
@@ -89,7 +90,8 @@ class _SplashPageState extends State<SplashPage> {
                             Container(
                               padding: const EdgeInsets.only(top: 40),
                               width: 300,
-                              child: Image.asset('assets/Splash/images/bookcard.png'),
+                              child: Image.asset(
+                                  'assets/Splash/images/bookcard.png'),
                             ),
                           ],
                         )
@@ -198,10 +200,10 @@ class _SplashPageState extends State<SplashPage> {
                     ),
                     label: const Icon(Icons.arrow_forward),
                     onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const Notificationallow()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Notificationallow()));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
@@ -335,7 +337,7 @@ class Notificationallow extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Homepage()));
+                              builder: (context) => const Main_page_view()));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor:

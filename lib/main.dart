@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:uhum/Homepage.dart';
 import 'package:uhum/splash.dart';
 
 void main() {

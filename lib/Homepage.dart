@@ -41,12 +41,15 @@ class _Main_page_viewState extends State<Main_page_view> {
           ),
         ],
         currentIndex: _selectedIndex,
-        
+        onTap: (int index) {
+          _pageController.animateToPage(index,
+              duration: Duration(microseconds: 1000), curve: Curves.easeIn);
+        },
       ),
       drawer: Drawer(),
       body: PageView(
         controller: _pageController,
-        children: [Homepage(),Discover()],
+        children: [Homepage(), Discover()],
         onPageChanged: (index) {
           onPageChange(index);
         },
@@ -204,7 +207,6 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ],
                         ),
-                       
                       ],
                     ),
                   ],
@@ -274,7 +276,6 @@ class _HomepageState extends State<Homepage> {
                             fontSize: 15,
                           ),
                         ),
-                       
                       ),
                       SizedBox(
                         height: 10,
@@ -317,7 +318,6 @@ class _HomepageState extends State<Homepage> {
                                               color: Colors.grey[100]),
                                         ),
                                       ),
-                                      
                                     ],
                                   ),
                                 ),
@@ -360,7 +360,6 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                       ),
-
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -439,7 +438,6 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                       ),
-                     
                     ],
                   ),
                 );
