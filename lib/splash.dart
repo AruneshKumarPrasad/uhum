@@ -14,28 +14,28 @@ class _SplashPageState extends State<SplashPage> {
   final _controller = PageController();
   @override
   Widget build(BuildContext context) {
-    precacheImage(const AssetImage("assets/images/android.png"), context);
+    precacheImage(const AssetImage("assets/Splash/images/android.png"), context);
     return Scaffold(
         body: Stack(
       children: [
         Container(
           alignment: Alignment.topRight,
           child: Image.asset(
-            'assets/images/Vector.png',
+            'assets/Splash/images/Vector.png',
             width: 250,
           ),
         ),
         Container(
           alignment: Alignment.centerLeft,
           child: Image.asset(
-            'assets/images/Vector (1).png',
+            'assets/Splash/images/Vector (1).png',
             width: 100,
           ),
         ),
         Container(
           alignment: Alignment.bottomCenter,
           child: Image.asset(
-            'assets/images/Vector (2).png',
+            'assets/Splash/images/Vector (2).png',
           ),
         ),
         Container(
@@ -88,7 +88,7 @@ class _SplashPageState extends State<SplashPage> {
                             Container(
                               padding: const EdgeInsets.only(top: 40),
                               width: 300,
-                              child: Image.asset('assets/images/bookcard.png'),
+                              child: Image.asset('assets/Splash/images/bookcard.png'),
                             ),
                           ],
                         )
@@ -124,11 +124,11 @@ class _SplashPageState extends State<SplashPage> {
                             Row(
                               children: [
                                 Image.asset(
-                                  'assets/images/Card.png',
+                                  'assets/Splash/images/Card.png',
                                   width: 170,
                                 ),
                                 Image.asset(
-                                  'assets/images/Card.png',
+                                  'assets/Splash/images/Card.png',
                                   width: 170,
                                 ),
                               ],
@@ -165,7 +165,7 @@ class _SplashPageState extends State<SplashPage> {
                               padding: const EdgeInsets.only(top: 40),
                               width: 300,
                               child: Image.asset(
-                                'assets/images/Book Chapter & Badge.png',
+                                'assets/Splash/images/Book Chapter & Badge.png',
                               ),
                             ),
                           ],
@@ -261,21 +261,21 @@ class Notificationallow extends StatelessWidget {
         Container(
           alignment: Alignment.topRight,
           child: Image.asset(
-            'assets/images/Vector.png',
+            'assets/Splash/images/Vector.png',
             width: 250,
           ),
         ),
         Container(
           alignment: Alignment.centerLeft,
           child: Image.asset(
-            'assets/images/Vector (1).png',
+            'assets/Splash/images/Vector (1).png',
             width: 100,
           ),
         ),
         Container(
           alignment: Alignment.bottomCenter,
           child: Image.asset(
-            'assets/images/Vector (2).png',
+            'assets/Splash/images/Vector (2).png',
           ),
         ),
         Column(
@@ -309,7 +309,7 @@ class Notificationallow extends StatelessWidget {
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(vertical: 30),
               child: Image.asset(
-                'assets/images/android.png',
+                'assets/Splash/images/android.png',
                 height: 400,
               ),
             ),
