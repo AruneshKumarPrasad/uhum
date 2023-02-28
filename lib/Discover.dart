@@ -255,7 +255,7 @@ class _DiscoverState extends State<Discover> {
                                 print(titles1[index]);
                               },
                               child: Container(
-                                width: 180,
+                                width: 195,
                                 height: 150,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
@@ -310,7 +310,7 @@ class _DiscoverState extends State<Discover> {
                         ),
                       ),
                       SizedBox(
-                        height: 100.0,
+                        height: 115.0,
                         child: ListView.builder(
                           physics: ClampingScrollPhysics(),
                           shrinkWrap: true,
@@ -326,8 +326,8 @@ class _DiscoverState extends State<Discover> {
                               child: Container(
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.all(10),
-                                width: 80,
-                                height: 110,
+                                width: 95,
+                                height: 115,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   image: DecorationImage(
@@ -349,39 +349,7 @@ class _DiscoverState extends State<Discover> {
                         ),
                       ),
                       SizedBox(
-                        height: 100.0,
-                        child: ListView.builder(
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: images3.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              Card(
-                            color: Colors.grey[900],
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            child: GestureDetector(
-                              onTap: () {
-                                
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.all(10),
-                                width: 80,
-                                height: 110,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  image: DecorationImage(
-                                      image: AssetImage(images3[index]),
-                                      fit: BoxFit.cover),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 100.0,
+                        height: 115.0,
                         child: ListView.builder(
                           physics: ClampingScrollPhysics(),
                           shrinkWrap: true,
@@ -397,68 +365,8 @@ class _DiscoverState extends State<Discover> {
                               child: Container(
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.all(10),
-                                width: 80,
-                                height: 110,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  image: DecorationImage(
-                                      image: AssetImage(images3[index]),
-                                      fit: BoxFit.cover),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 100.0,
-                        child: ListView.builder(
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: images3.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              Card(
-                            color: Colors.grey[900],
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.all(10),
-                                width: 80,
-                                height: 110,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  image: DecorationImage(
-                                      image: AssetImage(images3[index]),
-                                      fit: BoxFit.cover),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 100.0,
-                        child: ListView.builder(
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: images3.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              Card(
-                            color: Colors.grey[900],
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                alignment: Alignment.center,
-                                margin: EdgeInsets.all(10),
-                                width: 80,
-                                height: 110,
+                                width: 95,
+                                height: 115,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   image: DecorationImage(
