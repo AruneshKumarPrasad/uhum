@@ -74,6 +74,8 @@ flutter:
     - assets/Discover/images1/
     - assets/Discover/images2/
     - assets/Discover/images3/
+    - assets/Sharepage/images/bgpic.jpeg
+    - assets/Sharepage/images/share.png
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
