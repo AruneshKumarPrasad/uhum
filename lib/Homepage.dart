@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uhum/Discover.dart';
+import 'package:uhum/sharepge.dart';
 
 class Main_page_view extends StatefulWidget {
   const Main_page_view({super.key});
@@ -201,7 +202,10 @@ class _HomepageState extends State<Homepage> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    HapticFeedback.lightImpact();
+                                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const sharepge()));
                                   }),
                             ),
                           ],
