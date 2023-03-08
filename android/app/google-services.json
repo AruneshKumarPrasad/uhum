@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "831294847671",
+    "project_id": "uhum-a5996",
+    "storage_bucket": "uhum-a5996.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831294847671:android:5eb8e122106b5693206b32",
+        "android_client_info": {
+          "package_name": "com.procohat.uhum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831294847671-rmtg0t1e4mogvo2lvl12h87gup3j7f05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.procohat.uhum",
+            "certificate_hash": "722b538a0285dbf0e7fc9abb64fa488576001c60"
+          }
+        },
+        {
+          "client_id": "831294847671-cn82ja123ta7elvvvakbvudfj1kbogpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX9mryRUi0UZ9F12ksj3jI3bgDYxYlAs8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831294847671-cn82ja123ta7elvvvakbvudfj1kbogpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
