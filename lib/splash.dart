@@ -251,12 +251,13 @@ class _SplashPageState extends State<SplashPage> {
             ],
           ),
           Container(
-              alignment: Alignment.bottomCenter,
-              padding: const EdgeInsets.only(bottom: 20),
-              child: SmoothPageIndicator(
-                controller: _controller,
-                count: 3,
-              ))
+            alignment: Alignment.bottomCenter,
+            padding: const EdgeInsets.only(bottom: 20),
+            child: SmoothPageIndicator(
+              controller: _controller,
+              count: 3,
+            ),
+          )
         ],
       ),
     );
