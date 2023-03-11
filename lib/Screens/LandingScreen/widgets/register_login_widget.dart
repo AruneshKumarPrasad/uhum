@@ -1,0 +1,79 @@
+import '../../../Barrel/app_barrel.dart';
+import '../../../splash.dart';
+
+class RegisterLoginWidget extends StatelessWidget {
+  const RegisterLoginWidget({
+    super.key,
+    required this.mediaProp,
+  });
+
+  final Size mediaProp;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: mediaProp.height * 0.25,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            height: mediaProp.height * 0.06,
+            width: mediaProp.width * 0.5,
+            child: ElevatedButton.icon(
+              icon: const Text(
+                'Get Started',
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.3,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                ),
+              ),
+              label: const Icon(
+                Icons.arrow_forward,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NotificationAllow(),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 80, 163, 246),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  "Already have an account? ",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 24, 135, 226),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

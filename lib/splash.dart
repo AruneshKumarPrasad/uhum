@@ -204,10 +204,11 @@ class _SplashPageState extends State<SplashPage> {
                       label: const Icon(Icons.arrow_forward),
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const NotificationAllow()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NotificationAllow(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
@@ -312,11 +313,12 @@ class NotificationAllow extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 255, 255, 255),
-                        shadowColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18))),
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      shadowColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -333,7 +335,10 @@ class NotificationAllow extends StatelessWidget {
                 child: const Text(
                   'We will like to send you push notifications.',
                   textAlign: TextAlign.right,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -347,18 +352,24 @@ class NotificationAllow extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Main_page_view()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Main_page_view(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 80, 163, 246),
-                          shadowColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18))),
-                      child: const Text('Allow',
-                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                        backgroundColor:
+                            const Color.fromARGB(255, 80, 163, 246),
+                        shadowColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                      child: const Text(
+                        'Allow',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -370,13 +381,16 @@ class NotificationAllow extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 253, 253, 253),
-                          shadowColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18))),
-                      child: const Text('Don\'t Allow',
-                          style: TextStyle(fontSize: 18, color: Colors.black)),
+                        backgroundColor:
+                            const Color.fromARGB(255, 253, 253, 253),
+                        shadowColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18)),
+                      ),
+                      child: const Text(
+                        'Don\'t Allow',
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
                     ),
                   ),
                 ],

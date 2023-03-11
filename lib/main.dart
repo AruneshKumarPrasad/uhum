@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uhum/splash.dart';
+import 'package:uhum/Screens/SplashScreen/spash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Uhum',
+      title: 'Ahum',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const SplashPage(),
+      home: const SplashScreen(),
     );
   }
 }
