@@ -54,22 +54,28 @@ class _LandingScreenState extends State<LandingScreen> {
                   scrollDirection: Axis.horizontal,
                   children: [
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const Text(
-                          "Access Life Changing Programs",
-                          maxLines: 3,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 35,
+                        Container(
+                          margin: const EdgeInsets.only(top: 40),
+                          child: const Text(
+                            "Access Life Changing Programs",
+                            maxLines: 3,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 35,
+                            ),
                           ),
                         ),
+                        const Spacer(),
                         SizedBox(
-                          height: mediaProp.height * 0.2,
-                        ),
-                        Image.asset(
-                          'assets/Splash/images/bookcard.png',
+                          height: mediaProp.height * 0.4,
+                          width: double.maxFinite,
+                          child: const Image(
+                            image:
+                                AssetImage('assets/Splash/images/bookcard.png'),
+                          ),
                         ),
                       ],
                     ),
