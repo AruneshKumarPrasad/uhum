@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../OnBoardingScreen/OnBoardingScreen.dart';
+import 'widgets/socail_login_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
