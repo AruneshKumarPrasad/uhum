@@ -187,7 +187,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 width: 45,
                                 child: Image(
                                     image:
-                                        AssetImage('assets/images/apple.png'))),
+                                        AssetImage('assets/OnBoarding/apple.png'))),
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
@@ -224,7 +224,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 width: 45,
                                 child: Image(
                                     image:
-                                        AssetImage('assets/images/google.png'))),
+                                        AssetImage('assets/OnBoarding/google.png'))),
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
@@ -261,7 +261,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 width: 45,
                                 child: Image(
                                     image: AssetImage(
-                                        'assets/images/facebook.png'))),
+                                        'assets/OnBoarding/facebook.png'))),
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
