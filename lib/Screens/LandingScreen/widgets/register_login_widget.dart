@@ -1,5 +1,5 @@
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:uhum/Screens/PermissionScreen/permission_screen.dart';
+import 'package:uhum/Screens/RegisterScreen/register_screen.dart';
 
 import '../../../Barrel/app_barrel.dart';
 
@@ -42,7 +42,7 @@ class RegisterLoginWidget extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const PermissionScreen(),
+                    builder: (context) => const RegisterScreen(),
                   ),
                 );
               },
