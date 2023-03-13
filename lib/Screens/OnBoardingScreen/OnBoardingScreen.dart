@@ -143,18 +143,23 @@ navBar() {
     children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            color: const Color(0xff7758F6),
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.arrow_back, //  Navigator.pop(context);
-              color: Colors.white,
+        child: GestureDetector(
+          onTap: () {
+            // Navigator.of(context).pop();
+          },
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: const Color(0xff7758F6),
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.arrow_back, //  Navigator.pop(context);
+                color: Colors.white,
+              ),
             ),
           ),
         ),
@@ -176,8 +181,8 @@ navBar() {
                     child: SizedBox(
                         height: 45,
                         width: 45,
-                        child:
-                            Image(image: AssetImage('assets/OnBoarding/done.png'))),
+                        child: Image(
+                            image: AssetImage('assets/OnBoarding/done.png'))),
                   )),
             ),
           ),
