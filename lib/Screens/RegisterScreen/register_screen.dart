@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uhum/Screens/RegisterScreen/widgets/socail_login_widget.dart';
+
 import '../OnBoardingScreen/OnBoardingScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
