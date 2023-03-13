@@ -1,4 +1,5 @@
 import '../../../Barrel/app_barrel.dart';
+import '../../../Repository/userServices.dart';
 
 class SocialLoginWidget extends StatelessWidget {
   const SocialLoginWidget({
@@ -59,37 +60,42 @@ class SocialLoginWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: 65,
-          width: MediaQuery.of(context).size.width * 1.2,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: OutlinedButton(
-              onPressed: null,
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: Colors.black, width: 2),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  SizedBox(
-                      height: 45,
-                      width: 45,
-                      child: Image(
-                          image: AssetImage('assets/OnBoarding/google.png'))),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Sign up with Google",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontFamily: 'Poppins'),
+        GestureDetector(
+          onTap: (){
+            UserServices().signInWithGoogle().then((value) => print(value['error']));
+          },
+          child: SizedBox(
+            height: 65,
+            width: MediaQuery.of(context).size.width * 1.2,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: OutlinedButton(
+                onPressed: null,
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.black, width: 2),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    SizedBox(
+                        height: 45,
+                        width: 45,
+                        child: Image(
+                            image: AssetImage('assets/OnBoarding/google.png'))),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Sign up with Google",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontFamily: 'Poppins'),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
