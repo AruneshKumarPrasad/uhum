@@ -1,13 +1,17 @@
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:uhum/Screens/PermissionScreen/permission_screen.dart';
+
 import '../../../Barrel/app_barrel.dart';
-import '../../../splash.dart';
 
 class RegisterLoginWidget extends StatelessWidget {
   const RegisterLoginWidget({
     super.key,
     required this.mediaProp,
+    required this.controller,
   });
 
   final Size mediaProp;
+  final PageController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,7 @@ class RegisterLoginWidget extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const NotificationAllow(),
+                    builder: (context) => const PermissionScreen(),
                   ),
                 );
               },
@@ -72,6 +76,15 @@ class RegisterLoginWidget extends StatelessWidget {
               ),
             ],
           ),
+          Container(
+            margin: const EdgeInsets.only(top: 24),
+            alignment: Alignment.bottomCenter,
+            padding: const EdgeInsets.only(bottom: 20),
+            child: SmoothPageIndicator(
+              controller: controller,
+              count: 3,
+            ),
+          )
         ],
       ),
     );
