@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:uhum/Screens/LandingScreen/widgets/register_login_widget.dart';
+
+import 'widgets/register_login_widget.dart';
 
 class LandingScreen extends StatefulWidget {
-  const LandingScreen({Key? key}) : super(key: key);
+   LandingScreen( {Key? key}) : super(key: key);
 
   @override
   State<LandingScreen> createState() => _LandingScreenState();
@@ -10,9 +11,19 @@ class LandingScreen extends StatefulWidget {
 
 class _LandingScreenState extends State<LandingScreen> {
   final _controller = PageController();
+
+
+  // @override
+  // void didChangeDependencies() {
+  //   // TODO: implement didChangeDependencies
+  //   super.didChangeDependencies();
+  // }
+
+  
   @override
   Widget build(BuildContext context) {
     final Size mediaProp = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -72,10 +83,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         SizedBox(
                           height: mediaProp.height * 0.4,
                           width: double.maxFinite,
-                          child: const Image(
-                            image:
-                                AssetImage('assets/Splash/images/bookcard.png'),
-                          ),
+                          child: Image.asset('assets/Splash/images/Vector.png')
                         ),
                       ],
                     ),

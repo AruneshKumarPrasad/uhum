@@ -12,11 +12,33 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+ late AssetImage assetImage;
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+      final binding = WidgetsFlutterBinding.ensureInitialized();
+
+  
+    assetImage = AssetImage('assets/Splash/images/bookcard.png');
+ 
+ 
+   }
+
+   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+       precacheImage(assetImage, context);
+
+  }
   final _controller = PageController();
   @override
   Widget build(BuildContext context) {
-    precacheImage(
-        const AssetImage("assets/Splash/images/android.png"), context);
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -91,9 +113,7 @@ class _SplashPageState extends State<SplashPage> {
                               Container(
                                 padding: const EdgeInsets.only(top: 40),
                                 width: 300,
-                                child: Image.asset(
-                                    'assets/Splash/images/bookcard.png'),
-                              ),
+                                child:Image.asset( 'assets/Splash/images/Card.png'),) 
                             ],
                           )
                         ],
