@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'widgets/register_login_widget.dart';
 
 class LandingScreen extends StatefulWidget {
@@ -87,7 +88,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: RegisterLoginWidget(mediaProp: mediaProp),
+                child: RegisterLoginWidget(mediaProp: mediaProp, controller: _controller,),
               ),
             ],
           ),

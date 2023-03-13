@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+
+import '../GlobalWidgets/background_widget.dart';
 import '../LandingScreen/landing_screen.dart';
 
 class SplashScreen extends StatefulWidget {
