@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../OnBoardingScreen/OnBoardingScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -19,95 +18,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff7758F6),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff7758F6),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffE4E2E6),
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                  child: Text(
-                                '1',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff8A888C),
-                                    fontFamily: 'Poppins'),
-                              ))),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffE4E2E6),
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                  child: Text(
-                                '2',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff8A888C),
-                                    fontFamily: 'Poppins'),
-                              ))),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: const Color(0xffE4E2E6),
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                  child: Text(
-                                '3',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff8A888C),
-                                    fontFamily: 'Poppins'),
-                              ))),
-                        ),
-                      )
-                    ],
                   ),
                 ],
               ),
@@ -152,8 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        height: 60,
-                        width: MediaQuery.of(context).size.width * 0.9,
+                        width: MediaQuery.of(context).size.width * 1.1,
                         child: TextField(
                           controller: _emailController,
                           obscureText: false,
@@ -185,26 +120,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ],
                       ),
                     ),
-                    Container(
-                      height: 60,
-                        width: MediaQuery.of(context).size.width * 1.2,
-
-                      child: TextField(
-                        controller: _passwordController,
-                        obscureText: false,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(32.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 1.1,
+                        child: TextField(
+                          controller: _passwordController,
+                          obscureText: false,
+                          decoration: const InputDecoration(
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(32.0),
+                              ),
                             ),
+                            // labelText: 'Email',
+                            hintText: '***********',
                           ),
-                          // labelText: 'Email',
-                          hintText: '***********',
-                        
-                      ),
-                              
                         ),
+                      ),
                     ),
                     SizedBox(
                       height: 75,
@@ -400,6 +334,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
               ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: SocialLoginWidget(),
+              )
             ],
           ),
         ),
