@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:uhum/Screens/OnBoardingScreen/OnBoardingScreen.dart';
+
+import '../OnBoardingScreen/OnBoardingScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -151,7 +152,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 1.1,
+                        height: 60,
+                        width: MediaQuery.of(context).size.width * 0.9,
                         child: TextField(
                           controller: _emailController,
                           obscureText: false,
@@ -183,25 +185,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 1.1,
-                        child: TextField(
-                          controller: _passwordController,
-                          obscureText: false,
-                          decoration: const InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(32.0),
-                              ),
+                    Container(
+                      height: 60,
+                        width: MediaQuery.of(context).size.width * 1.2,
+
+                      child: TextField(
+                        controller: _passwordController,
+                        obscureText: false,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(32.0),
                             ),
-                            // labelText: 'Email',
-                            hintText: '***********',
                           ),
-                        ),
+                          // labelText: 'Email',
+                          hintText: '***********',
+                        
                       ),
+                              
+                        ),
                     ),
                     SizedBox(
                       height: 75,
