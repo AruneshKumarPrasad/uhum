@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:uhum/Screens/GlobalWidgets/background_widget.dart';
-import 'package:uhum/Screens/LandingScreen/landing_screen.dart';
+import '../LandingScreen/landing_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,10 +15,13 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Offset> _slideAnimation;
+  
+
 
   @override
   void initState() {
     super.initState();
+   
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -34,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const LandingScreen(),
+              builder: (context) =>  LandingScreen(),
             ),
           );
         });
@@ -44,6 +46,8 @@ class _SplashScreenState extends State<SplashScreen>
     });
     _animationController.forward();
   }
+
+
 
   @override
   void dispose() {
