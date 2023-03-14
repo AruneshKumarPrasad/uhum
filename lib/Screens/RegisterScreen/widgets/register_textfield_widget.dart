@@ -35,15 +35,11 @@ class RegisterTextField extends StatelessWidget {
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade500,
-              width: 2.0,
-            ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(32.0),
-            ),
-          ),
+          enabledBorder: buildOutlineInputBorder(),
+          focusedBorder: buildOutlineInputBorder(),
+          focusedErrorBorder: buildOutlineInputBorder(error: true),
+          errorBorder: buildOutlineInputBorder(error: true),
+          disabledBorder: buildOutlineInputBorder(),
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey.shade500),
           contentPadding: const EdgeInsets.symmetric(
@@ -51,6 +47,18 @@ class RegisterTextField extends StatelessWidget {
             horizontal: 20.0,
           ),
         ),
+      ),
+    );
+  }
+
+  OutlineInputBorder buildOutlineInputBorder({bool error = false}) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: error ? Colors.red : Colors.grey.shade500,
+        width: 2.0,
+      ),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(32.0),
       ),
     );
   }

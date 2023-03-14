@@ -1,5 +1,3 @@
-import 'package:provider/provider.dart';
-import 'package:uhum/Provider/OnBoardingScreen/on_boarding_provider.dart';
 import 'package:uhum/Screens/OnBoardingScreen/widgets/nav_bar_widget.dart';
 
 import '../../Barrel/app_barrel.dart';
@@ -7,7 +5,12 @@ import 'Fragments/profile_info.dart';
 import 'widgets/tab_label_widget.dart';
 
 class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({super.key});
+  const OnBoardingScreen({
+    super.key,
+    required this.userCredMap,
+  });
+
+  final Map<String, String> userCredMap;
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -30,6 +33,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    Future.delayed(const Duration(milliseconds: 0)).then((value) {
+      final provider = Provider.of<OnBoardingProvider>(context, listen: false);
+      provider.updateEmail(widget.userCredMap['email']!);
+      provider.updatePassword(widget.userCredMap['password']!);
+      if (provider.firstName != '' && provider.lastname != '') {
+        _firstnameController.text = provider.firstName;
+        _lastnameController.text = provider.lastname;
+      }
+    });
   }
 
   @override
