@@ -1,3 +1,6 @@
+import 'package:provider/provider.dart';
+import 'package:uhum/Provider/OnBoardingScreen/on_boarding_provider.dart';
+
 import '../../Barrel/app_barrel.dart';
 import 'Fragments/profile_info.dart';
 import 'widgets/tab_label_widget.dart';
@@ -46,6 +49,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                 Navigator.of(context).pop();
               } else {
                 _tabController.animateTo(_tabController.index - 1);
+                context
+                    .read<OnBoardingProvider>()
+                    .updateTabIndex(_tabController.index);
               }
             },
             child: Container(
@@ -124,14 +130,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                  onPressed: _scrollToNextTab,
+                  onPressed: () {
+                    _scrollToNextTab();
+                    context
+                        .read<OnBoardingProvider>()
+                        .updateTabIndex(_tabController.index);
+                  },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff7758F6),
-                      shape: const StadiumBorder()),
-                  child: const Text(
-                    'Continue',
-                    style: TextStyle(
-                      fontSize: 16,
+                    backgroundColor: const Color(0xff7758F6),
+                    shape: const StadiumBorder(),
+                  ),
+                  child: Text(
+                    context.watch<OnBoardingProvider>().tabIndex == 2
+                        ? 'Done'
+                        : 'Continue',
+                    style: const TextStyle(
+                      fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Poppins',

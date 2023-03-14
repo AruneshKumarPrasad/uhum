@@ -1,4 +1,7 @@
+import 'package:provider/provider.dart';
+
 import '../../../Barrel/app_barrel.dart';
+import '../../../Provider/OnBoardingScreen/on_boarding_provider.dart';
 
 class RegisterFormWidget extends StatelessWidget {
   const RegisterFormWidget({
@@ -121,7 +124,10 @@ class RegisterFormWidget extends StatelessWidget {
                 } else {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const OnBoardingScreen(),
+                      builder: (context) => ChangeNotifierProvider(
+                        create: (context) => OnBoardingProvider(),
+                        child: const OnBoardingScreen(),
+                      ),
                     ),
                   );
                 }
