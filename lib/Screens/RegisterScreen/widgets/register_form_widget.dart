@@ -56,11 +56,13 @@ class RegisterFormWidget extends StatelessWidget {
             vertical: 12,
           ),
           child: SizedBox(
+            height: 60,
             width: MediaQuery.of(context).size.width * 1.1,
             child: TextField(
               controller: _emailController,
               obscureText: false,
               decoration: const InputDecoration(
+                fillColor: Colors.white,
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
@@ -96,6 +98,7 @@ class RegisterFormWidget extends StatelessWidget {
               controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
+                fillColor: Colors.white,
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
