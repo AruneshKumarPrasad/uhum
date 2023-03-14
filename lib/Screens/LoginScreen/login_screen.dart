@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:uhum/Screens/RegisterScreen/widgets/register_form_widget.dart';
-import 'package:uhum/Screens/RegisterScreen/widgets/socail_login_widget.dart';
+import '../../Barrel/app_barrel.dart';
+import '../RegisterScreen/widgets/register_form_widget.dart';
+import '../RegisterScreen/widgets/socail_login_widget.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
@@ -45,11 +45,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: RegisterFormWidget(
                   emailController: _emailController,
                   passwordController: _passwordController,
+                  isLogin: true,
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12),
-                child: SocialLoginWidget(),
+                child: SocialLoginWidget(
+                  isLogin: true,
+                ),
               )
             ],
           ),

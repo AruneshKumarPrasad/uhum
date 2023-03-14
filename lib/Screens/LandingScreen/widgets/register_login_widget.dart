@@ -1,5 +1,4 @@
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:uhum/Screens/RegisterScreen/register_screen.dart';
 
 import '../../../Barrel/app_barrel.dart';
 
@@ -56,21 +55,31 @@ class RegisterLoginWidget extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              FittedBox(
+            children: [
+              const FittedBox(
                 fit: BoxFit.fitWidth,
                 child: Text(
                   "Already have an account? ",
                   style: TextStyle(fontSize: 18),
                 ),
               ),
-              FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 24, 135, 226),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
+                },
+                child: const FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 24, 135, 226),
+                    ),
                   ),
                 ),
               ),

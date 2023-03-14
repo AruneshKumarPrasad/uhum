@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import '../../Barrel/app_barrel.dart';
+import 'Fragments/profile_info.dart';
+import 'widgets/tab_label_widget.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -7,126 +9,131 @@ class OnBoardingScreen extends StatefulWidget {
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
+class _OnBoardingScreenState extends State<OnBoardingScreen>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _lastnameController = TextEditingController();
 
+  late TabController _tabController;
+
+  void _scrollToNextTab() {
+    if (_tabController.index < 2) {
+      _tabController.animateTo(_tabController.index + 1);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Size mediaProp = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: <Widget>[
-                navBar(),
-                Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Profile info',
-                            style: TextStyle(
-                              color: Color(0xff4C2C72),
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 26,
-                            ),
-                          ),
-                        ],
+        appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () {
+              if (_tabController.index == 0) {
+                Navigator.of(context).pop();
+              } else {
+                _tabController.animateTo(_tabController.index - 1);
+              }
+            },
+            child: Container(
+              margin: const EdgeInsets.all(6),
+              decoration: const BoxDecoration(
+                color: Color(0xff7758F6),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          actions: [
+            const Spacer(
+              flex: 7,
+            ),
+            Expanded(
+              flex: 8,
+              child: IgnorePointer(
+                child: TabBar(
+                  controller: _tabController,
+                  dividerColor: Colors.transparent,
+                  tabs: const [
+                    Tab(
+                      child: TabLabelWidget(
+                        label: '1',
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'First Name',
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                    Tab(
+                      child: TabLabelWidget(
+                        label: '2',
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 1.1,
-                        child: TextField(
-                          controller: _firstnameController,
-                          obscureText: false,
-                          decoration: const InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(32.0),
-                              ),
-                            ),
-                            hintText: 'John',
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Last Name',
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 1.1,
-                        child: TextField(
-                          controller: _lastnameController,
-                          obscureText: false,
-                          decoration: const InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(32.0),
-                              ),
-                            ),
-                            hintText: 'Doe',
-                          ),
-                        ),
+                    Tab(
+                      child: TabLabelWidget(
+                        label: '3',
                       ),
                     ),
                   ],
                 ),
-              ],
+              ),
+            )
+          ],
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  ProfileInfoFragment(
+                    mediaProp: mediaProp,
+                    firstnameController: _firstnameController,
+                    lastnameController: _lastnameController,
+                  ),
+                  const Center(
+                    child: TabLabelWidget(
+                      label: '2',
+                    ),
+                  ),
+                  const Center(
+                    child: TabLabelWidget(
+                      label: '3',
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 75,
-              width: MediaQuery.of(context).size.width * 1.2,
+              width: mediaProp.width * 1.2,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                  onPressed: () => {},
+                  onPressed: _scrollToNextTab,
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff7758F6),
                       shape: const StadiumBorder()),
                   child: const Text(
-                    'Contiune',
+                    'Continue',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
+                      fontWeight: FontWeight.bold,
                       fontFamily: 'Poppins',
                     ),
                   ),
@@ -138,101 +145,4 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
     );
   }
-}
-
-navBar() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: () {
-            // Navigator.of(context).pop();
-          },
-          child: Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: const Color(0xff7758F6),
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.arrow_back, //  Navigator.pop(context);
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-      ),
-      Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: const Color(0xffE4E2E6),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Center(
-                    child: SizedBox(
-                        height: 45,
-                        width: 45,
-                        child: Image(
-                            image: AssetImage('assets/OnBoarding/done.png'))),
-                  )),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: const Color(0xffE4E2E6),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Center(
-                      child: Text(
-                    '2',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff8A888C),
-                        fontFamily: 'Poppins'),
-                  ))),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: const Color(0xffE4E2E6),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Center(
-                      child: Text(
-                    '3',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff8A888C),
-                        fontFamily: 'Poppins'),
-                  ))),
-            ),
-          )
-        ],
-      ),
-    ],
-  );
 }

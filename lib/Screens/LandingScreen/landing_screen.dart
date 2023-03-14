@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:uhum/Screens/GlobalWidgets/background_widget.dart';
+import 'package:uhum/Screens/LandingScreen/widgets/register_login_widget.dart';
 
-import 'widgets/register_login_widget.dart';
+import '../../Barrel/app_barrel.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({Key? key}) : super(key: key);

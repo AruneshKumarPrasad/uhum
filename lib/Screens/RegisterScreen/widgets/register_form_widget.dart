@@ -1,16 +1,17 @@
 import '../../../Barrel/app_barrel.dart';
-import '../../OnBoardingScreen/OnBoardingScreen.dart';
 
 class RegisterFormWidget extends StatelessWidget {
   const RegisterFormWidget({
     super.key,
     required TextEditingController emailController,
     required TextEditingController passwordController,
+    this.isLogin = false,
   })  : _emailController = emailController,
         _passwordController = passwordController;
 
   final TextEditingController _emailController;
   final TextEditingController _passwordController;
+  final bool isLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,10 @@ class RegisterFormWidget extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
-                'Sign up',
-                style: TextStyle(
+                isLogin ? 'Sign-In' : 'Sign-Up',
+                style: const TextStyle(
                   color: Color(0xff4C2C72),
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
@@ -35,21 +36,22 @@ class RegisterFormWidget extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                'Email',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                ),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              'Email',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
               ),
-            ],
+            ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 12,
+          ),
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 1.1,
             child: TextField(
@@ -68,18 +70,19 @@ class RegisterFormWidget extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                'Password',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 12,
+          ),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              'Password',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
               ),
-            ],
+            ),
           ),
         ),
         Padding(
@@ -88,7 +91,7 @@ class RegisterFormWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 1.1,
             child: TextField(
               controller: _passwordController,
-              obscureText: false,
+              obscureText: true,
               decoration: const InputDecoration(
                 filled: true,
                 border: OutlineInputBorder(
@@ -108,20 +111,28 @@ class RegisterFormWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: ElevatedButton(
-              onPressed: () => {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const OnBoardingScreen(),
-                  ),
-                )
+              onPressed: () {
+                if (isLogin) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const Homepage(),
+                    ),
+                  );
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const OnBoardingScreen(),
+                    ),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xff7758F6),
                 shape: const StadiumBorder(),
               ),
-              child: const Text(
-                'Create an account',
-                style: TextStyle(
+              child: Text(
+                isLogin ? 'Login' : 'Create an account',
+                style: const TextStyle(
                   fontSize: 16,
                   fontFamily: 'Poppins',
                   color: Colors.white,
@@ -134,12 +145,39 @@ class RegisterFormWidget extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text(
-                'Already have an account?Sign in',
-                style: TextStyle(
+                isLogin
+                    ? "Don't have an Account? "
+                    : 'Already have an Account?  ',
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  if (isLogin) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterScreen(),
+                      ),
+                    );
+                  } else {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  }
+                },
+                child: Text(
+                  isLogin ? "Sign-Up" : "Sign-In",
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue.shade700,
+                  ),
                 ),
               ),
             ],
