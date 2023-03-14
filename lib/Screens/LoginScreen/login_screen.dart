@@ -1,5 +1,5 @@
 import '../../Barrel/app_barrel.dart';
-import '../RegisterScreen/widgets/register_form_widget.dart';
+import '../RegisterScreen/widgets/register_login_form_widget.dart';
 import '../RegisterScreen/widgets/socail_login_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,27 +10,28 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: Container(
-              margin: const EdgeInsets.all(6),
-              decoration: const BoxDecoration(
-                color: Color(0xff7758F6),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+          scrolledUnderElevation: 0,
+          toolbarHeight: 80,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 14.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xff7758F6),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -42,9 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                 ),
-                child: RegisterFormWidget(
-                  emailController: _emailController,
-                  passwordController: _passwordController,
+                child: RegisterLoginFormWidget(
                   isLogin: true,
                 ),
               ),

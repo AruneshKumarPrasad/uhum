@@ -1,19 +1,17 @@
-import 'package:provider/provider.dart';
+import 'package:uhum/Screens/RegisterScreen/widgets/register_textfield_widget.dart';
 
 import '../../../Barrel/app_barrel.dart';
-import '../../../Provider/OnBoardingScreen/on_boarding_provider.dart';
 
-class RegisterFormWidget extends StatelessWidget {
-  const RegisterFormWidget({
+class RegisterLoginFormWidget extends StatelessWidget {
+  RegisterLoginFormWidget({
     super.key,
-    required TextEditingController emailController,
-    required TextEditingController passwordController,
     this.isLogin = false,
-  })  : _emailController = emailController,
-        _passwordController = passwordController;
+  });
 
-  final TextEditingController _emailController;
-  final TextEditingController _passwordController;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _focusEmail = FocusNode();
+  final FocusNode _focusPassword = FocusNode();
   final bool isLogin;
 
   @override
@@ -50,29 +48,10 @@ class RegisterFormWidget extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 8,
-            vertical: 12,
-          ),
-          child: SizedBox(
-            height: 60,
-            width: MediaQuery.of(context).size.width * 1.1,
-            child: TextField(
-              controller: _emailController,
-              obscureText: false,
-              decoration: const InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                ),
-                hintText: 'name@example.com',
-              ),
-            ),
-          ),
+        RegisterTextField(
+          controller: _emailController,
+          hintText: 'name@example.com',
+          focus: _focusEmail,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
@@ -90,26 +69,10 @@ class RegisterFormWidget extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 1.1,
-            child: TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(32.0),
-                  ),
-                ),
-                // labelText: 'Email',
-                hintText: '***********',
-              ),
-            ),
-          ),
+        RegisterTextField(
+          controller: _passwordController,
+          hintText: '*******',
+          focus: _focusPassword,
         ),
         SizedBox(
           height: 75,
