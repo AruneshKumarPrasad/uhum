@@ -18,19 +18,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: Container(
-              margin: const EdgeInsets.all(6),
-              decoration: const BoxDecoration(
-                color: Color(0xff7758F6),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+          toolbarHeight: 80,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 14.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Container(
+                margin: const EdgeInsets.all(6),
+                decoration: const BoxDecoration(
+                  color: Color(0xff7758F6),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

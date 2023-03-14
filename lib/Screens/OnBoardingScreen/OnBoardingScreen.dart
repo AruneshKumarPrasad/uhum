@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:uhum/Provider/OnBoardingScreen/on_boarding_provider.dart';
+import 'package:uhum/Screens/OnBoardingScreen/widgets/nav_bar_widget.dart';
 
 import '../../Barrel/app_barrel.dart';
 import 'Fragments/profile_info.dart';
@@ -40,63 +41,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
   @override
   Widget build(BuildContext context) {
     final Size mediaProp = MediaQuery.of(context).size;
+    final provider = Provider.of<OnBoardingProvider>(context);
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () {
-              if (_tabController.index == 0) {
-                Navigator.of(context).pop();
-              } else {
-                _tabController.animateTo(_tabController.index - 1);
-                context
-                    .read<OnBoardingProvider>()
-                    .updateTabIndex(_tabController.index);
-              }
-            },
-            child: Container(
-              margin: const EdgeInsets.all(6),
-              decoration: const BoxDecoration(
-                color: Color(0xff7758F6),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          actions: [
-            const Spacer(
-              flex: 7,
-            ),
-            Expanded(
-              flex: 8,
-              child: IgnorePointer(
-                child: TabBar(
-                  controller: _tabController,
-                  dividerColor: Colors.transparent,
-                  tabs: const [
-                    Tab(
-                      child: TabLabelWidget(
-                        label: '1',
-                      ),
-                    ),
-                    Tab(
-                      child: TabLabelWidget(
-                        label: '2',
-                      ),
-                    ),
-                    Tab(
-                      child: TabLabelWidget(
-                        label: '3',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
+        appBar: AppBarWidget(
+          tabController: _tabController,
+          provider: provider,
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,18 +82,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                 child: ElevatedButton(
                   onPressed: () {
                     _scrollToNextTab();
-                    context
-                        .read<OnBoardingProvider>()
-                        .updateTabIndex(_tabController.index);
+                    provider.updateTabIndex(_tabController.index);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff7758F6),
                     shape: const StadiumBorder(),
                   ),
                   child: Text(
-                    context.watch<OnBoardingProvider>().tabIndex == 2
-                        ? 'Done'
-                        : 'Continue',
+                    provider.tabIndex == 2 ? 'Done' : 'Continue',
                     style: const TextStyle(
                       fontSize: 20,
                       color: Colors.white,
