@@ -32,6 +32,11 @@ class RegisterTextField extends StatelessWidget {
           }
           return null;
         },
+        keyboardType: hintText == '*******'
+            ? TextInputType.visiblePassword
+            : TextInputType.emailAddress,
+        textInputAction:
+            hintText == '*******' ? TextInputAction.done : TextInputAction.next,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,

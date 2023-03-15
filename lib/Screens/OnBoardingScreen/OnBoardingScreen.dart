@@ -1,7 +1,8 @@
+import 'package:uhum/Screens/OnBoardingScreen/Fragments/profile_photo_fragment.dart';
 import 'package:uhum/Screens/OnBoardingScreen/widgets/nav_bar_widget.dart';
 
 import '../../Barrel/app_barrel.dart';
-import 'Fragments/profile_info.dart';
+import 'Fragments/profile_info_fragment.dart';
 import 'widgets/tab_label_widget.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -73,11 +74,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                     firstnameController: _firstnameController,
                     lastnameController: _lastnameController,
                   ),
-                  const Center(
-                    child: TabLabelWidget(
-                      label: '2',
-                    ),
-                  ),
+                  const ProfilePhotoFragment(),
                   const Center(
                     child: TabLabelWidget(
                       label: '3',
@@ -93,8 +90,29 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    _scrollToNextTab();
-                    provider.updateTabIndex(_tabController.index);
+                    if (_tabController.index == 0 &&
+                        (_firstnameController.text.trim().length >= 2 &&
+                            _lastnameController.text.trim().length >= 2)) {
+                      provider
+                          .updateFirstName(_firstnameController.text.trim());
+                      provider.updateLastName(_lastnameController.text.trim());
+                      _scrollToNextTab();
+                      provider.updateTabIndex(_tabController.index);
+                    } else if (_tabController.index == 0 &&
+                        (_firstnameController.text.trim().length < 2 ||
+                            _lastnameController.text.trim().length < 2)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(milliseconds: 1200),
+                          behavior: SnackBarBehavior.floating,
+                          content:
+                              Text('Names must be at least 2 characters long!'),
+                        ),
+                      );
+                    } else {
+                      _scrollToNextTab();
+                      provider.updateTabIndex(_tabController.index);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff7758F6),

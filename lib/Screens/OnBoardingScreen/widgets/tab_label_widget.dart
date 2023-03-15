@@ -10,6 +10,7 @@ class TabLabelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<OnBoardingProvider>(context);
     return Container(
       width: 40,
       height: 40,
@@ -18,14 +19,18 @@ class TabLabelWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
       ),
       alignment: Alignment.center,
-      child: Text(
-        label,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Color(0xff8A888C),
-          fontFamily: 'Poppins',
-        ),
-      ),
+      child: provider.tabIndex >= int.parse(label)
+          ? const Image(
+              image: AssetImage('assets/OnBoarding/done.png'),
+            )
+          : Text(
+              label,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xff8A888C),
+                fontFamily: 'Poppins',
+              ),
+            ),
     );
   }
 }

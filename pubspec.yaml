@@ -44,6 +44,7 @@ dependencies:
   firebase_core: ^2.7.1
   provider: ^6.0.5
   cloud_firestore: ^4.4.4
+  lottie: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +85,7 @@ flutter:
     - assets/Sharepage/images/share.png
     - assets/Splash/images/bookcard.png
     - assets/OnBoarding/
+    - assets/OnBoarding/ProfilePicture.jpg
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
