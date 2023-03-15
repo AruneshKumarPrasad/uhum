@@ -1,6 +1,5 @@
-import 'package:lottie/lottie.dart';
-
 import '../../../Barrel/app_barrel.dart';
+import '../widgets/profile_image_picker_widget.dart';
 
 class ProfilePhotoFragment extends StatelessWidget {
   const ProfilePhotoFragment({Key? key}) : super(key: key);
@@ -45,26 +44,7 @@ class ProfilePhotoFragment extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 height: mediaProp.height * 0.6,
-                child: Container(
-                  height: mediaProp.height * 0.4,
-                  width: mediaProp.height * 0.4,
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(12),
-                    ),
-                    image: DecorationImage(
-                      colorFilter: ColorFilter.linearToSrgbGamma(),
-                      fit: BoxFit.contain,
-                      image: AssetImage('assets/OnBoarding/ProfilePicture.jpg'),
-                    ),
-                  ),
-                  child: Lottie.asset(
-                    'assets/OnBoarding/ClickMe.json',
-                    height: 100,
-                    width: 100,
-                  ),
-                ),
+                child: ProfileImagePickerWidget(mediaProp: mediaProp),
               ),
             ],
           ),
