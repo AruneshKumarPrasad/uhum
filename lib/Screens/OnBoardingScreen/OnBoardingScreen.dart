@@ -1,8 +1,7 @@
-import 'package:uhum/Screens/OnBoardingScreen/Fragments/profile_photo_fragment.dart';
-import 'package:uhum/Screens/OnBoardingScreen/widgets/nav_bar_widget.dart';
-
 import '../../Barrel/app_barrel.dart';
 import 'Fragments/profile_info_fragment.dart';
+import 'Fragments/profile_photo_fragment.dart';
+import 'widgets/nav_bar_widget.dart';
 import 'widgets/tab_label_widget.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -25,8 +24,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
   late TabController _tabController;
 
   void _scrollToNextTab() {
+                  FocusScope.of(context).unfocus();
     if (_tabController.index < 2) {
       _tabController.animateTo(_tabController.index + 1);
+
     }
   }
 

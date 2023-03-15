@@ -82,7 +82,9 @@ class UserServices {
           level,
           currentExperience,
           email,
-        );
+        ).then((value) {
+          // save uId using shared preferences
+        });
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
