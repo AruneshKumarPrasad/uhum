@@ -17,6 +17,48 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _animationController;
   late Animation<Offset> _slideAnimation;
 
+  void reDirector() {
+    Timer(const Duration(seconds: 2), () async {
+      await UserServices.instance.getUserId().then((value) async {
+        if (value != "") {
+          await UserServices.instance.checkIfOnBoarded(value).then((value) {
+            if (value) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const Homepage(),
+                ),
+              );
+            } else {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LandingScreen(),
+                ),
+              );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider(
+                    create: (context) => OnBoardingProvider(),
+                    child: const OnBoardingScreen(
+                      userCredMap: null,
+                    ),
+                  ),
+                ),
+              );
+            }
+          });
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LandingScreen(),
+            ),
+          );
+        }
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -31,46 +73,7 @@ class _SplashScreenState extends State<SplashScreen>
     ).animate(_animationController);
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Timer(const Duration(seconds: 2), () async {
-          UserServices.instance.getUserId().then((value) {
-            if (value != "") {
-              UserServices.instance.checkIfOnBoarded(value).then((value) {
-                if (value) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const Homepage(),
-                    ),
-                  );
-                } else {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LandingScreen(),
-                    ),
-                  ).then((value) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                          create: (context) => OnBoardingProvider(),
-                          child: const OnBoardingScreen(
-                            userCredMap: null,
-                          ),
-                        ),
-                      ),
-                    );
-                  });
-                }
-              });
-            } else {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LandingScreen(),
-                ),
-              );
-            }
-          });
-        });
+        reDirector();
       } else if (status == AnimationStatus.dismissed) {
         _animationController.forward();
       }

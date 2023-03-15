@@ -122,7 +122,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (formValidate()) {
                     if (isLogin) {
                       Navigator.of(context).pushReplacement(
@@ -131,9 +131,10 @@ class RegisterLoginFormWidget extends StatelessWidget {
                         ),
                       );
                     } else {
-                      UserServices.instance
+                      await UserServices.instance
                           .checkIfAccountExists(
-                              _emailController.text.trim().toLowerCase())
+                        _emailController.text.trim().toLowerCase(),
+                      )
                           .then((value) {
                         if (value) {
                           Navigator.of(context).push(

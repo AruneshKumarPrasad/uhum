@@ -1,12 +1,6 @@
+import '../Barrel/app_barrel.dart';
 
-
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
-
-class UserActions{
+class UserActions {
   // Profile Image Modification
   final ImagePicker _profileImagepicker = ImagePicker();
   File? profileImage;
@@ -26,7 +20,8 @@ class UserActions{
       print('No Image Selected');
     }
   }
-void uploadProfileImage() {
+
+  void uploadProfileImage() {
     FirebaseStorage.instance
         .ref()
         .child('users/${Uri.file(profileImage!.path).pathSegments.last}')
@@ -35,7 +30,7 @@ void uploadProfileImage() {
       value.ref.getDownloadURL().then((value) {
         print(value);
         //      getUserData();
-       // updateProfileImage(profileImage: value);
+        // updateProfileImage(profileImage: value);
       }).catchError((error) {
         print('my error is: ');
 
@@ -48,7 +43,7 @@ void uploadProfileImage() {
     });
   }
 
-    void updateProfileImage({required String profileImage,required String uId}) {
+  void updateProfileImage({required String profileImage, required String uId}) {
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)
@@ -58,6 +53,4 @@ void uploadProfileImage() {
       print(error.toString());
     });
   }
-
-
 }
