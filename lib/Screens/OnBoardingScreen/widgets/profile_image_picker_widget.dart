@@ -14,7 +14,9 @@ class ProfileImagePickerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (!provider.isImageLoading) {
+          provider.updateImageLoading(true);
           print('Implement Picker!');
+          provider.updateImageLoading(false);
         }
       },
       child: AnimatedCrossFade(

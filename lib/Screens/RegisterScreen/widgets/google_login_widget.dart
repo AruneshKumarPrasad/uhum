@@ -15,15 +15,36 @@ class GoogleLoginWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        UserServices().signInWithGoogle().then(
-          (value) {
-            if (value['error'] != null) {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const Homepage(),
-                ),
-              );
+        UserServices.instance.signInWithGoogle().then(
+          (value) async {
+            if (value['error'] == null) {
+              print("No Error with Google Login!");
+              UserServices.instance
+                  .checkIfOnBoarded(value['user'].uid)
+                  .then((value) {
+                if (value) {
+                  print("Doc Exists!");
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const Homepage(),
+                    ),
+                  );
+                } else {
+                  print("Doc Does not Exists!");
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ChangeNotifierProvider(
+                        create: (context) => OnBoardingProvider(),
+                        child: const OnBoardingScreen(
+                          userCredMap: null,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+              });
             } else {
+              print(value['error']);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   margin: EdgeInsets.only(

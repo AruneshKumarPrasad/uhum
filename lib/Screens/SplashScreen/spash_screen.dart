@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
-
-import '../GlobalWidgets/background_widget.dart';
+import '../../Barrel/app_barrel.dart';
+import '../../Repository/user_services.dart';
 import '../LandingScreen/landing_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,13 +16,11 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Offset> _slideAnimation;
-  
-
 
   @override
   void initState() {
     super.initState();
-   
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -34,13 +31,45 @@ class _SplashScreenState extends State<SplashScreen>
     ).animate(_animationController);
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Timer(const Duration(seconds: 2), () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>  LandingScreen(),
-            ),
-          );
+        Timer(const Duration(seconds: 2), () async {
+          UserServices.instance.getUserId().then((value) {
+            if (value != "") {
+              UserServices.instance.checkIfOnBoarded(value).then((value) {
+                if (value) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const Homepage(),
+                    ),
+                  );
+                } else {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LandingScreen(),
+                    ),
+                  ).then((value) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ChangeNotifierProvider(
+                          create: (context) => OnBoardingProvider(),
+                          child: const OnBoardingScreen(
+                            userCredMap: null,
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+                }
+              });
+            } else {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LandingScreen(),
+                ),
+              );
+            }
+          });
         });
       } else if (status == AnimationStatus.dismissed) {
         _animationController.forward();
@@ -48,8 +77,6 @@ class _SplashScreenState extends State<SplashScreen>
     });
     _animationController.forward();
   }
-
-
 
   @override
   void dispose() {

@@ -1,3 +1,4 @@
+import 'package:uhum/Repository/user_services.dart';
 import 'package:uhum/Screens/RegisterScreen/widgets/register_textfield_widget.dart';
 
 import '../../../Barrel/app_barrel.dart';
@@ -45,7 +46,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
       return null;
     }
 
-    bool _formValidate() {
+    bool formValidate() {
       if (_formKey.currentState!.validate()) {
         return true;
       } else {
@@ -122,28 +123,36 @@ class RegisterLoginFormWidget extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: ElevatedButton(
                 onPressed: () {
-                  if (_formValidate()) {
+                  if (formValidate()) {
                     if (isLogin) {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const Homepage(),
                         ),
                       );
                     } else {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ChangeNotifierProvider(
-                            create: (context) => OnBoardingProvider(),
-                            child: OnBoardingScreen(
-                              userCredMap: {
-                                'email':
-                                    _emailController.text.trim().toLowerCase(),
-                                'password': _passwordController.text,
-                              },
+                      UserServices.instance
+                          .checkIfAccountExists(
+                              _emailController.text.trim().toLowerCase())
+                          .then((value) {
+                        if (value) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ChangeNotifierProvider(
+                                create: (context) => OnBoardingProvider(),
+                                child: OnBoardingScreen(
+                                  userCredMap: {
+                                    'email': _emailController.text
+                                        .trim()
+                                        .toLowerCase(),
+                                    'password': _passwordController.text,
+                                  },
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      );
+                          );
+                        } else {}
+                      });
                     }
                   }
                 },

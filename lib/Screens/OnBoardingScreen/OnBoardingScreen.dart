@@ -10,7 +10,7 @@ class OnBoardingScreen extends StatefulWidget {
     required this.userCredMap,
   });
 
-  final Map<String, String> userCredMap;
+  final Map<String, String>? userCredMap;
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -24,10 +24,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
   late TabController _tabController;
 
   void _scrollToNextTab() {
-                  FocusScope.of(context).unfocus();
+    FocusScope.of(context).unfocus();
     if (_tabController.index < 2) {
       _tabController.animateTo(_tabController.index + 1);
-
     }
   }
 
@@ -37,8 +36,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
     _tabController = TabController(length: 3, vsync: this);
     Future.delayed(const Duration(milliseconds: 0)).then((value) {
       final provider = Provider.of<OnBoardingProvider>(context, listen: false);
-      provider.updateEmail(widget.userCredMap['email']!);
-      provider.updatePassword(widget.userCredMap['password']!);
+      if (widget.userCredMap != null) {
+        provider.updateEmail(widget.userCredMap!['email']!);
+        provider.updatePassword(widget.userCredMap!['password']!);
+      }
       if (provider.firstName != '' && provider.lastname != '') {
         _firstnameController.text = provider.firstName;
         _lastnameController.text = provider.lastname;

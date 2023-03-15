@@ -1,11 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/userModel.dart';
 
 class UserServices {
+  static final UserServices instance = UserServices._internal();
+
+  UserServices._internal();
+
   Future<Map<String, dynamic>> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -17,31 +22,19 @@ class UserServices {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
-      final credential = GoogleAuthProvider.credential(
+      final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithCredential(credential)
-          .catchError((error) async {
-        if (error.code == 'credential-already-in-use') {
-          final GoogleSignInAccount? googleUser =
-              await GoogleSignIn().signInSilently();
-          final GoogleSignInAuthentication googleAuth =
-              await googleUser!.authentication;
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
-          final credential = GoogleAuthProvider.credential(
-            accessToken: googleAuth.accessToken,
-            idToken: googleAuth.idToken,
-          );
-          throw await FirebaseAuth.instance.signInWithCredential(credential);
-        } else {
-          throw error;
-        }
-      });
+      // Refresh the ID token to prevent the "stale" error
+      final User user = userCredential.user!;
+      final idTokenResult = await user.getIdTokenResult(true);
 
-      saveUserId(userCredential.user!.uid);
+      saveUserId(user.uid);
       return {'user': userCredential.user, 'error': null};
     } on FirebaseAuthException catch (e) {
       return {'user': null, 'error': e.message};
@@ -70,9 +63,8 @@ class UserServices {
       String email,
       String password) async {
     try {
-       await FirebaseAuth.instance
-          .createUserWithEmailAndPassword
-          (email: email, password: password)
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
         saveUser(
           firstName,
@@ -82,18 +74,24 @@ class UserServices {
           level,
           currentExperience,
           email,
-        ).then((value) {
-          // save uId using shared preferences
+        ).then((value) async {
+          // await saveUserId(value.user!.uid);
         });
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        if (kDebugMode) {
+          print('The password provided is too weak.');
+        }
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        if (kDebugMode) {
+          print('The account already exists for that email.');
+        }
       }
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
@@ -126,27 +124,36 @@ class UserServices {
     }
   }
 
-
-Future<bool> checkIfAccountExists(String email) async {
-  try {
-    final querySnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .where('email', isEqualTo: email)
-        .limit(1)
-        .get();
-    return querySnapshot.docs.isNotEmpty;
-  } on FirebaseException catch (e) {
-    // Handle the Firebase error
-    print('Firebase error: ${e.message}');
-    return false;
-  } catch (e) {
-    // Handle other errors
-    print('Error: $e');
-    return false;
+  Future<bool> checkIfOnBoarded(String uid) async {
+    try {
+      final userDoc =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      return userDoc.exists;
+    } catch (e) {
+      return false;
+    }
   }
-}
 
-
-
-
+  Future<bool> checkIfAccountExists(String email) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .limit(1)
+          .get();
+      return querySnapshot.docs.isNotEmpty;
+    } on FirebaseException catch (e) {
+      // Handle the Firebase error
+      if (kDebugMode) {
+        print('Firebase error: ${e.message}');
+      }
+      return false;
+    } catch (e) {
+      // Handle other errors
+      if (kDebugMode) {
+        print('Error: $e');
+      }
+      return false;
+    }
+  }
 }
