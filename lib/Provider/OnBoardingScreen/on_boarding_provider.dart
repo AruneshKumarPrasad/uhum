@@ -6,12 +6,18 @@ class OnBoardingProvider with ChangeNotifier {
   String _password = '';
   String _firstName = '';
   String _lastname = '';
+  String _photoLocation = '';
+  bool _isImageLoading = false;
+  bool _isDone = false;
 
   int get tabIndex => _tabIndex;
   String get email => _email;
   String get password => _password;
   String get firstName => _firstName;
   String get lastname => _lastname;
+  String get photoLocation => _photoLocation;
+  bool get isImageLoading => _isImageLoading;
+  bool get isDone => _isDone;
 
   void updateTabIndex(int value) {
     _tabIndex = value;
@@ -29,12 +35,27 @@ class OnBoardingProvider with ChangeNotifier {
   }
 
   void updateFirstName(String value) {
-    _password = value;
+    _firstName = value;
     notifyListeners();
   }
 
   void updateLastName(String value) {
-    _password = value;
+    _lastname = value;
+    notifyListeners();
+  }
+
+  void updatePhotoLocation(String value) {
+    _photoLocation = value;
+    notifyListeners();
+  }
+
+  void updateImageLoading(bool value) {
+    _isImageLoading = value;
+    notifyListeners();
+  }
+
+  void updateDone(bool value) {
+    _isDone = value;
     notifyListeners();
   }
 }

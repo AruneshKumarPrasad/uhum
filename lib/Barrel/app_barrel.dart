@@ -1,4 +1,5 @@
 export 'package:flutter/material.dart';
+export 'package:lottie/lottie.dart';
 export 'package:provider/provider.dart';
 export 'package:uhum/Homepage.dart';
 export 'package:uhum/Provider/OnBoardingScreen/on_boarding_provider.dart';
