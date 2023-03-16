@@ -13,81 +13,80 @@ class ProfileImagePickerWidget extends StatelessWidget {
     final provider = Provider.of<OnBoardingProvider>(context);
     return GestureDetector(
       onTap: () {
-        // if (!provider.isImageLoading) {
-        //   provider.updateImageLoading(true);
-        //   print('Implement Picker!');
-        //   provider.updateImageLoading(false);
-        // }
-        showDialog(
-            context: context,
-            builder: (conext) {
-              return Center(
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  //  height: mediaProp.height* 0.2,
-                  width: mediaProp.width * 0.75,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15)),
+        if (!provider.isImageLoading) {
+          provider.updateImageLoading(true);
+          showDialog(
+              context: context,
+              builder: (conext) {
+                return Center(
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    //  height: mediaProp.height* 0.2,
+                    width: mediaProp.width * 0.75,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15)),
 
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Row(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Select Soruce',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              Spacer(),
+                            ],
+                          ),
+                        ),
+                        Divider(),
+                        Row(
                           mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
-                              'Select Soruce',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            Spacer(),
+                            //IconButton(onPressed: (){}, icon: icon)
+                            ElevatedButton.icon(
+                                onPressed: () {
+                                  provider.getPorfileImage(true).then(
+                                      (value) => Navigator.of(context).pop());
+                                },
+                                icon: Icon(Icons.camera),
+                                label: Text('Camera')),
+
+                            ///TextButton(onPressed: (){}, child: Text('Camera')),
+                            ElevatedButton.icon(
+                                onPressed: () {
+                                  provider.getPorfileImage(false).then(
+                                      (value) => Navigator.of(context).pop());
+                                },
+                                icon: Icon(Icons.photo),
+                                label: Text('Gallery')),
                           ],
                         ),
-                      ),
-                      Divider(),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          //IconButton(onPressed: (){}, icon: icon)
-                          ElevatedButton.icon(
-                              onPressed: () {
-                                provider.getPorfileImage(true).then(
-                                    (value) => Navigator.of(context).pop());
-                              },
-                              icon: Icon(Icons.camera),
-                              label: Text('Camera')),
-
-                          ///TextButton(onPressed: (){}, child: Text('Camera')),
-                          ElevatedButton.icon(
-                              onPressed: () {
-                                provider.getPorfileImage(false).then(
-                                    (value) => Navigator.of(context).pop());
-                              },
-                              icon: Icon(Icons.photo),
-                              label: Text('Gallery')),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text('Close')),
-                        ],
-                      )
-                    ],
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Close')),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
-            });
+                );
+              });
+          provider.updateImageLoading(false);
+        }
       },
       child: AnimatedCrossFade(
         crossFadeState: !provider.isImageLoading && provider.photoLocation != ''
@@ -104,13 +103,10 @@ class ProfileImagePickerWidget extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
+                image: const DecorationImage(
                   colorFilter: ColorFilter.linearToSrgbGamma(),
                   fit: BoxFit.contain,
-                  image: provider.isPicturePicked
-                      ? FileImage(File(provider.croppedFile!.path))
-                          as ImageProvider
-                      : AssetImage('assets/OnBoarding/ProfilePicture.jpg'),
+                  image: AssetImage('assets/OnBoarding/ProfilePicture.jpg'),
                 ),
               ),
               child: provider.isPicturePicked
@@ -133,8 +129,10 @@ class ProfileImagePickerWidget extends StatelessWidget {
             ),
             image: DecorationImage(
               colorFilter: const ColorFilter.linearToSrgbGamma(),
-              fit: BoxFit.contain,
-              image: AssetImage(provider.photoLocation),
+              fit: BoxFit.cover,
+              image: FileImage(
+                File(provider.photoLocation),
+              ),
             ),
           ),
         ),

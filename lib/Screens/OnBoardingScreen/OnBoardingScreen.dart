@@ -24,7 +24,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
   late TabController _tabController;
 
   void _scrollToNextTab() {
-    FocusScope.of(context).unfocus();
     if (_tabController.index < 2) {
       _tabController.animateTo(_tabController.index + 1);
     }
@@ -98,7 +97,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                       provider
                           .updateFirstName(_firstnameController.text.trim());
                       provider.updateLastName(_lastnameController.text.trim());
-                      _scrollToNextTab();
+                      FocusScope.of(context).unfocus();
+                      Future.delayed(const Duration(milliseconds: 250))
+                          .then((value) => _scrollToNextTab());
                       provider.updateTabIndex(_tabController.index);
                     } else if (_tabController.index == 0 &&
                         (_firstnameController.text.trim().length < 2 ||

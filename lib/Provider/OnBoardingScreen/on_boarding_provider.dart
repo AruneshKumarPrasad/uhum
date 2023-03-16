@@ -59,33 +59,31 @@ class OnBoardingProvider with ChangeNotifier {
   void updateDone(bool value) {
     _isDone = value;
     notifyListeners();
-  } 
-  
+  }
+
   // handling userProfilePicture
 
   //######################  Profile Picture Picking   #################33
-  
-  
-  
+
   final ImagePicker _profilePicturepicker = ImagePicker();
   File? profilePicture;
   bool isPicturePicked = false;
-  CroppedFile? croppedFile ;
+  CroppedFile? croppedFile;
 
   Future<void> getPorfileImage(bool isCamera) async {
     final pickedFile = await _profilePicturepicker.pickImage(
-      source: isCamera? ImageSource.camera:ImageSource.gallery,
-       maxWidth: 200.0, maxHeight: 300.0
-    );
+        source: isCamera ? ImageSource.camera : ImageSource.gallery,
+        maxWidth: 200.0,
+        maxHeight: 300.0);
     if (pickedFile != null) {
       profilePicture = File(pickedFile.path);
-     // uploadprofilePicture();
-       croppedFile  = await ImageCropper().cropImage(
-        aspectRatio:const CropAspectRatio(ratioX: 1, ratioY: 1),
-      sourcePath: profilePicture!.path
-      , cropStyle: CropStyle.circle);
-     
-      isPicturePicked = true;
+      // uploadprofilePicture();
+      croppedFile = await ImageCropper().cropImage(
+          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+          sourcePath: profilePicture!.path,
+          cropStyle: CropStyle.circle);
+      _photoLocation = croppedFile!.path;
+      // isPicturePicked = true;
       notifyListeners();
     } else {
       print('No Image Selected');
@@ -103,7 +101,9 @@ class OnBoardingProvider with ChangeNotifier {
       value.ref.getDownloadURL().then((value) {
         print(value);
         //      getUserData();
-         updateprofilePicture(profilePicture: value, );
+        updateprofilePicture(
+          profilePicture: value,
+        );
       }).catchError((error) {
         print('my error is: ');
 
@@ -115,7 +115,8 @@ class OnBoardingProvider with ChangeNotifier {
       // print(error.toString());
     });
   }
- // ######### updating the PoriflePicture field in users Collection for respective user ############
+
+  // ######### updating the PoriflePicture field in users Collection for respective user ############
   void updateprofilePicture({required String profilePicture}) {
     FirebaseFirestore.instance
         .collection('users')
