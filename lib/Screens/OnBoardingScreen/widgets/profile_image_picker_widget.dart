@@ -13,35 +13,50 @@ class ProfileImagePickerWidget extends StatelessWidget {
     final provider = Provider.of<OnBoardingProvider>(context);
     return GestureDetector(
       onTap: () {
-        if (!provider.isImageLoading) {
-          provider.updateImageLoading(true);
-          print('Implement Picker!');
-          provider.updateImageLoading(false);
-        }
+        // if (!provider.isImageLoading) {
+        //   provider.updateImageLoading(true);
+        //   print('Implement Picker!');
+        //   provider.updateImageLoading(false);
+        // }
+        provider.getPorfileImage();
       },
       child: AnimatedCrossFade(
         crossFadeState: !provider.isImageLoading && provider.photoLocation != ''
             ? CrossFadeState.showSecond
             : CrossFadeState.showFirst,
         duration: const Duration(milliseconds: 250),
-        firstChild: Container(
-          height: mediaProp.height * 0.4,
-          width: mediaProp.height * 0.4,
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
+        firstChild: CircleAvatar(
+       radius: 100,
+          child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+
+            child: Container(
+          
+              // height: mediaProp.height * 0.4,
+              // width: mediaProp.height * 0.4,
+              alignment: Alignment.center,
+              decoration:  BoxDecoration(
+          
+                borderRadius: BorderRadius.circular(20),
+                image:
+                
+                 DecorationImage(
+                  
+                  colorFilter: ColorFilter.linearToSrgbGamma(),
+                  fit: BoxFit.contain,
+                  image:  provider.isPicturePicked? 
+                FileImage(File(provider.croppedFile!
+                                            .path)) as ImageProvider
+                                            
+                                            : AssetImage('assets/OnBoarding/ProfilePicture.jpg'),
+                ),
+              ),
+              child: provider.isPicturePicked? null: Lottie.asset(
+                'assets/OnBoarding/ClickMe.json',
+                height: 150,
+                width: 150,
+              ),
             ),
-            image: DecorationImage(
-              colorFilter: ColorFilter.linearToSrgbGamma(),
-              fit: BoxFit.contain,
-              image: AssetImage('assets/OnBoarding/ProfilePicture.jpg'),
-            ),
-          ),
-          child: Lottie.asset(
-            'assets/OnBoarding/ClickMe.json',
-            height: 150,
-            width: 150,
           ),
         ),
         secondChild: Container(

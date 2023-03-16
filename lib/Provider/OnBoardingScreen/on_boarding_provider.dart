@@ -1,3 +1,5 @@
+import 'package:image_cropper/image_cropper.dart';
+
 import '../../Barrel/app_barrel.dart';
 
 class OnBoardingProvider with ChangeNotifier {
@@ -68,14 +70,21 @@ class OnBoardingProvider with ChangeNotifier {
   final ImagePicker _profilePicturepicker = ImagePicker();
   File? profilePicture;
   bool isPicturePicked = false;
+  CroppedFile? croppedFile ;
 
   Future<void> getPorfileImage() async {
     final pickedFile = await _profilePicturepicker.pickImage(
       source: ImageSource.gallery,
+       maxWidth: 200.0, maxHeight: 300.0
     );
     if (pickedFile != null) {
       profilePicture = File(pickedFile.path);
-      uploadprofilePicture();
+     // uploadprofilePicture();
+       croppedFile  = await ImageCropper().cropImage(
+        aspectRatio:const CropAspectRatio(ratioX: 1, ratioY: 1),
+      sourcePath: profilePicture!.path
+      , cropStyle: CropStyle.circle);
+     
       isPicturePicked = true;
       notifyListeners();
     } else {

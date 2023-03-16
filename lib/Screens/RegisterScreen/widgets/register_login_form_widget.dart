@@ -1,7 +1,6 @@
-import 'package:uhum/Repository/user_services.dart';
-import 'package:uhum/Screens/RegisterScreen/widgets/register_textfield_widget.dart';
-
 import '../../../Barrel/app_barrel.dart';
+import '../../../Repository/user_services.dart';
+import 'register_textfield_widget.dart';
 
 class RegisterLoginFormWidget extends StatelessWidget {
   RegisterLoginFormWidget({
@@ -123,6 +122,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: ElevatedButton(
                 onPressed: () async {
+               
                   if (formValidate()) {
                     if (isLogin) {
                       Navigator.of(context).pushReplacement(
