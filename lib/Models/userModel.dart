@@ -5,7 +5,7 @@ class UserModel {
 late  String firstName;
 late  String lastName;
 late  String email;
-late  String profilePictureUrl;
+late  String profilePicture;
 late  String level;
 late  String currentExperience;
 late  String uId;
@@ -14,7 +14,7 @@ late  String uId;
     required this.firstName,
     required this.lastName,
     required this.email,
-    required this.profilePictureUrl,
+    required this.profilePicture,
     required this.level,
     required this.currentExperience,
     required this.uId
@@ -26,7 +26,7 @@ late  String uId;
     lastName = json['lastName'];
   email = json['email']; 
   uId = json['uId'];
-  profilePictureUrl = json['profilePictureUrl'];
+  profilePicture = json['profilePicture'];
   level = json['level'];
   currentExperience = json['currentExperience'];
 }
@@ -37,7 +37,7 @@ firstName:'firstName',
   lastName:'lastName',
   email:'email',
   uId:'uId',
-  profilePictureUrl :'profilePictureUrl',
+  profilePicture :'profilePicture',
   level:'level' ,
   currentExperience : 'currentExperience',
   };

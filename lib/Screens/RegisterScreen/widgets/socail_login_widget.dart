@@ -110,7 +110,7 @@ class SocialLoginWidget extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(top:40.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [

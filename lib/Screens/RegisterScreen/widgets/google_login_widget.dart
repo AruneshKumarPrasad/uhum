@@ -41,6 +41,7 @@ class GoogleLoginWidget extends StatelessWidget {
                 }
               });
             } else {
+              print(value['error']);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   margin: EdgeInsets.only(

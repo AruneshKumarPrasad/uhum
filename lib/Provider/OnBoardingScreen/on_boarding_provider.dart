@@ -57,5 +57,64 @@ class OnBoardingProvider with ChangeNotifier {
   void updateDone(bool value) {
     _isDone = value;
     notifyListeners();
+  } 
+  
+  // handling userProfilePicture
+
+  //######################  Profile Picture Picking   #################33
+  
+  
+  
+  final ImagePicker _profilePicturepicker = ImagePicker();
+  File? profilePicture;
+  bool isPicturePicked = false;
+
+  Future<void> getPorfileImage() async {
+    final pickedFile = await _profilePicturepicker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      profilePicture = File(pickedFile.path);
+      uploadprofilePicture();
+      isPicturePicked = true;
+      notifyListeners();
+    } else {
+      print('No Image Selected');
+    }
+  }
+
+  // ########## uploading the selected picture to fireStorage #######
+
+  void uploadprofilePicture() {
+    FirebaseStorage.instance
+        .ref()
+        .child('users/${Uri.file(profilePicture!.path).pathSegments.last}')
+        .putFile(File(profilePicture!.path))
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {
+        print(value);
+        //      getUserData();
+         updateprofilePicture(profilePicture: value, );
+      }).catchError((error) {
+        print('my error is: ');
+
+        print(error.toString());
+      });
+    }).catchError((error) {
+      print('error is: ');
+      print(error.toString());
+      // print(error.toString());
+    });
+  }
+ // ######### updating the PoriflePicture field in users Collection for respective user ############
+  void updateprofilePicture({required String profilePicture}) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc('uId')
+        .update({"profilePicture": profilePicture}).then((value) {
+      //getUserData();
+    }).catchError((error) {
+      print(error.toString());
+    });
   }
 }

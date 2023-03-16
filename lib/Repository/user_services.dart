@@ -57,7 +57,7 @@ class UserServices {
   Future<void> createAccount(
       String firstName,
       String lastName,
-      String profilePictureURL,
+      String profilePicture,
       String level,
       String currentExperience,
       String email,
@@ -69,7 +69,7 @@ class UserServices {
         saveUser(
           firstName,
           lastName,
-          profilePictureURL,
+          profilePicture,
           value.user!.uid,
           level,
           currentExperience,
@@ -98,7 +98,7 @@ class UserServices {
   Future<void> saveUser(
     String firstName,
     String lastName,
-    String profilePictureURL,
+    String profilePicture,
     String uId,
     String level,
     String currentExperience,
@@ -109,7 +109,7 @@ class UserServices {
           firstName: firstName,
           lastName: lastName,
           email: email,
-          profilePictureUrl: profilePictureURL,
+          profilePicture: profilePicture,
           level: level,
           currentExperience: currentExperience,
           uId: uId);
