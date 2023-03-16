@@ -72,9 +72,9 @@ class OnBoardingProvider with ChangeNotifier {
   bool isPicturePicked = false;
   CroppedFile? croppedFile ;
 
-  Future<void> getPorfileImage() async {
+  Future<void> getPorfileImage(bool isCamera) async {
     final pickedFile = await _profilePicturepicker.pickImage(
-      source: ImageSource.gallery,
+      source: isCamera? ImageSource.camera:ImageSource.gallery,
        maxWidth: 200.0, maxHeight: 300.0
     );
     if (pickedFile != null) {
