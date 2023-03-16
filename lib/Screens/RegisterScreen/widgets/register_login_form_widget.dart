@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uhum/Repository/user_services.dart';
+import 'package:uhum/Screens/RegisterScreen/widgets/register_textfield_widget.dart';
+
 import '../../../Barrel/app_barrel.dart';
-import '../../../Repository/user_services.dart';
-import 'register_textfield_widget.dart';
 
 class RegisterLoginFormWidget extends StatelessWidget {
   RegisterLoginFormWidget({
@@ -122,21 +124,61 @@ class RegisterLoginFormWidget extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: ElevatedButton(
                 onPressed: () async {
-               
                   if (formValidate()) {
                     if (isLogin) {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const Homepage(),
-                        ),
-                      );
+                      await UserServices.instance
+                          .loginWithEmail(
+                              _emailController.text.trim().toLowerCase(),
+                              _passwordController.text)
+                          .then((value) async {
+                        if (value['error'] == null) {
+                          final resultUser = value['user']! as User;
+                          await UserServices.instance
+                              .checkIfOnBoarded(resultUser.uid)
+                              .then((value) {
+                            if (!value) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ChangeNotifierProvider(
+                                    create: (context) => OnBoardingProvider(),
+                                    child: OnBoardingScreen(
+                                      userCredMap: {
+                                        'email': _emailController.text
+                                            .trim()
+                                            .toLowerCase(),
+                                        'password': _passwordController.text,
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => const Homepage(),
+                                ),
+                              );
+                            }
+                          });
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              duration: const Duration(milliseconds: 1500),
+                              behavior: SnackBarBehavior.floating,
+                              content: Text(
+                                value['error'],
+                              ),
+                            ),
+                          );
+                        }
+                      });
                     } else {
                       await UserServices.instance
-                          .checkIfAccountExists(
-                        _emailController.text.trim().toLowerCase(),
-                      )
+                          .createEmailAccount(
+                              _emailController.text.trim().toLowerCase(),
+                              _passwordController.text)
                           .then((value) {
-                        if (value) {
+                        if (value['error'] == null) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => ChangeNotifierProvider(
@@ -152,7 +194,17 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               ),
                             ),
                           );
-                        } else {}
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              duration: const Duration(milliseconds: 1500),
+                              behavior: SnackBarBehavior.floating,
+                              content: Text(
+                                value['error'],
+                              ),
+                            ),
+                          );
+                        }
                       });
                     }
                   }

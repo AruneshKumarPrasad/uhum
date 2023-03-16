@@ -34,7 +34,20 @@ class UserServices {
       final User user = userCredential.user!;
       await user.getIdTokenResult(true);
 
-      saveUserId(user.uid);
+      final String uID = userCredential.user!.uid;
+      _saveUserId(uID);
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uID)
+          .get()
+          .then((value) async {
+        if (!value.exists) {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(uID)
+              .set({'onBoarded': false});
+        }
+      });
       return {'user': userCredential.user, 'error': null};
     } on FirebaseAuthException catch (e) {
       return {'user': null, 'error': e.message};
@@ -49,35 +62,25 @@ class UserServices {
     return uId;
   }
 
-  Future<void> saveUserId(String value) async {
+  Future<void> _saveUserId(String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('uId', value);
   }
 
-  Future<void> createAccount(
-      String firstName,
-      String lastName,
-      String profilePicture,
-      String level,
-      String currentExperience,
-      String email,
-      String password) async {
+  Future<Map<String, dynamic>> createEmailAccount(
+    String email,
+    String password,
+  ) async {
     try {
       await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        saveUser(
-          firstName,
-          lastName,
-          profilePicture,
-          value.user!.uid,
-          level,
-          currentExperience,
-          email,
-        ).then((value) async {
-          // await saveUserId(value.user!.uid);
-        });
-      });
+          .createUserWithEmailAndPassword(email: email, password: password);
+      final String uID = FirebaseAuth.instance.currentUser!.uid;
+      _saveUserId(uID);
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uID)
+          .set({'onBoarded': false});
+      return {'user': FirebaseAuth.instance.currentUser, 'error': null};
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         if (kDebugMode) {
@@ -88,31 +91,62 @@ class UserServices {
           print('The account already exists for that email.');
         }
       }
+      return {'user': null, 'error': e.message};
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return {'user': null, 'error': e.message};
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
+      return {'user': null, 'error': e};
     }
   }
 
-  Future<void> saveUser(
-    String firstName,
-    String lastName,
-    String profilePicture,
-    String uId,
-    String level,
-    String currentExperience,
+  Future<Map<String, dynamic>> loginWithEmail(
     String email,
+    String password,
   ) async {
     try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      final String uID = FirebaseAuth.instance.currentUser!.uid;
+      _saveUserId(uID);
+      return {'user': FirebaseAuth.instance.currentUser, 'error': null};
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        if (kDebugMode) {
+          print('Invalid email or password.');
+        }
+      }
+      return {'user': null, 'error': e.message};
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return {'user': null, 'error': e};
+    }
+  }
+
+  Future<void> saveUser({
+    required String firstName,
+    required String lastName,
+    required String profilePicture,
+    required String uId,
+    required String email,
+  }) async {
+    try {
       UserModel userModel = UserModel(
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          profilePicture: profilePicture,
-          level: level,
-          currentExperience: currentExperience,
-          uId: uId);
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        profilePicture: profilePicture,
+        level: '1',
+        currentExperience: '0',
+        uId: uId,
+      );
       // create a new document with the username as the document ID
       await FirebaseFirestore.instance
           .collection('users')
@@ -128,31 +162,13 @@ class UserServices {
     try {
       final userDoc =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      return userDoc.exists;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  Future<bool> checkIfAccountExists(String email) async {
-    try {
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: email)
-          .limit(1)
-          .get();
-      return querySnapshot.docs.isNotEmpty;
-    } on FirebaseException catch (e) {
-      // Handle the Firebase error
-      if (kDebugMode) {
-        print('Firebase error: ${e.message}');
+      if (userDoc.exists) {
+        final result = userDoc.data()!['onBoarded'] as bool;
+        return result;
+      } else {
+        return false;
       }
-      return false;
     } catch (e) {
-      // Handle other errors
-      if (kDebugMode) {
-        print('Error: $e');
-      }
       return false;
     }
   }
