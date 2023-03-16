@@ -32,7 +32,7 @@ class UserServices {
 
       // Refresh the ID token to prevent the "stale" error
       final User user = userCredential.user!;
-      final idTokenResult = await user.getIdTokenResult(true);
+      await user.getIdTokenResult(true);
 
       saveUserId(user.uid);
       return {'user': userCredential.user, 'error': null};

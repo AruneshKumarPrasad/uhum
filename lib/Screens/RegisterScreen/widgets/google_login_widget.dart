@@ -17,6 +17,7 @@ class GoogleLoginWidget extends StatelessWidget {
       onTap: () async {
         await UserServices.instance.signInWithGoogle().then(
           (value) async {
+            print(value['error']);
             if (value['error'] == null) {
               await UserServices.instance
                   .checkIfOnBoarded(value['user'].uid)
