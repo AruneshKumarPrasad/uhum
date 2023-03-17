@@ -99,8 +99,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                       provider.updateLastName(_lastnameController.text.trim());
                       FocusScope.of(context).unfocus();
                       Future.delayed(const Duration(milliseconds: 250))
-                          .then((value) => _scrollToNextTab());
-                      provider.updateTabIndex(_tabController.index);
+                          .then((value) {
+                        _scrollToNextTab();
+                        provider.updateTabIndex(_tabController.index);
+                      });
                     } else if (_tabController.index == 0 &&
                         (_firstnameController.text.trim().length < 2 ||
                             _lastnameController.text.trim().length < 2)) {

@@ -43,20 +43,24 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Uhum Needs Access to your Photo Library to help you get a Picture</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Uhum Needs Access to your Camera to help you take a Picture</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>CFBundleURLTypes</key>
-    <array>
-    	<dict>
-    		<key>CFBundleTypeRole</key>
-    		<string>Editor</string>
-    		<key>CFBundleURLSchemes</key>
-    		<array>
-    			<string>com.googleusercontent.apps.831294847671-mb0q76o6kbajciirji090bpesdkkk484</string>
-    		</array>
-    	</dict>
-    </array>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.831294847671-mb0q76o6kbajciirji090bpesdkkk484</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

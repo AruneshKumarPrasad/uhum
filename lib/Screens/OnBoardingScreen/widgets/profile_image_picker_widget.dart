@@ -1,4 +1,7 @@
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import '../../../Barrel/app_barrel.dart';
+import '../../GlobalWidgets/image_selector_widget.dart';
 
 class ProfileImagePickerWidget extends StatelessWidget {
   const ProfileImagePickerWidget({
@@ -11,130 +14,94 @@ class ProfileImagePickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<OnBoardingProvider>(context);
-    return GestureDetector(
-      onTap: () {
-        if (!provider.isImageLoading) {
-          provider.updateImageLoading(true);
-          showDialog(
-              context: context,
-              builder: (conext) {
-                return Center(
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    //  height: mediaProp.height* 0.2,
-                    width: mediaProp.width * 0.75,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15)),
-
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Select Soruce',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Spacer(),
-                            ],
-                          ),
-                        ),
-                        Divider(),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            //IconButton(onPressed: (){}, icon: icon)
-                            ElevatedButton.icon(
-                                onPressed: () {
-                                  provider.getPorfileImage(true).then(
-                                      (value) => Navigator.of(context).pop());
-                                },
-                                icon: Icon(Icons.camera),
-                                label: Text('Camera')),
-
-                            ///TextButton(onPressed: (){}, child: Text('Camera')),
-                            ElevatedButton.icon(
-                                onPressed: () {
-                                  provider.getPorfileImage(false).then(
-                                      (value) => Navigator.of(context).pop());
-                                },
-                                icon: Icon(Icons.photo),
-                                label: Text('Gallery')),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text('Close')),
-                          ],
-                        )
-                      ],
-                    ),
+    return AnimatedCrossFade(
+      crossFadeState: provider.isImageLoading
+          ? CrossFadeState.showSecond
+          : CrossFadeState.showFirst,
+      duration: const Duration(milliseconds: 250),
+      firstChild: GestureDetector(
+        onTap: () {
+          if (!provider.isImageLoading) {
+            provider.updateImageLoading(true);
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return ImageSelectorWidget(
+                    mediaProp: mediaProp,
+                    provider: provider,
+                  );
+                }).then(
+              (value) => provider.updateImageLoading(false),
+            );
+          }
+        },
+        child: AnimatedCrossFade(
+          crossFadeState:
+              !provider.isImageLoading && provider.photoLocation != ''
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
+          duration: const Duration(milliseconds: 250),
+          firstChild: Container(
+            height: mediaProp.width * 0.7,
+            width: mediaProp.width * 0.7,
+            alignment: Alignment.center,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                colorFilter: ColorFilter.linearToSrgbGamma(),
+                fit: BoxFit.contain,
+                image: AssetImage('assets/OnBoarding/ProfilePicture.jpg'),
+              ),
+            ),
+            child: provider.photoLocation != ''
+                ? null
+                : Lottie.asset(
+                    'assets/OnBoarding/ClickMe.json',
+                    height: 150,
+                    width: 150,
                   ),
-                );
-              });
-          provider.updateImageLoading(false);
-        }
-      },
-      child: AnimatedCrossFade(
-        crossFadeState: !provider.isImageLoading && provider.photoLocation != ''
-            ? CrossFadeState.showSecond
-            : CrossFadeState.showFirst,
-        duration: const Duration(milliseconds: 250),
-        firstChild: CircleAvatar(
-          radius: 100,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Container(
-              // height: mediaProp.height * 0.4,
-              // width: mediaProp.height * 0.4,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: const DecorationImage(
-                  colorFilter: ColorFilter.linearToSrgbGamma(),
-                  fit: BoxFit.contain,
-                  image: AssetImage('assets/OnBoarding/ProfilePicture.jpg'),
+          ),
+          secondChild: Container(
+            height: mediaProp.width * 0.7,
+            width: mediaProp.width * 0.7,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(15),
+              ),
+              image: DecorationImage(
+                colorFilter: const ColorFilter.linearToSrgbGamma(),
+                fit: BoxFit.cover,
+                image: FileImage(
+                  File(provider.photoLocation),
                 ),
               ),
-              child: provider.isPicturePicked
-                  ? null
-                  : Lottie.asset(
-                      'assets/OnBoarding/ClickMe.json',
-                      height: 150,
-                      width: 150,
-                    ),
             ),
           ),
         ),
-        secondChild: Container(
-          height: mediaProp.height * 0.4,
-          width: mediaProp.height * 0.4,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(12),
-            ),
-            image: DecorationImage(
-              colorFilter: const ColorFilter.linearToSrgbGamma(),
-              fit: BoxFit.cover,
-              image: FileImage(
-                File(provider.photoLocation),
-              ),
-            ),
+      ),
+      secondChild: Container(
+        height: mediaProp.width * 0.7,
+        width: mediaProp.width * 0.7,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15),
           ),
+        ),
+        child: SpinKitFoldingCube(
+          size: 40,
+          itemBuilder: (BuildContext context, int index) {
+            return DecoratedBox(
+              decoration: BoxDecoration(
+                color: index.isEven
+                    ? Colors.deepPurpleAccent.shade100.withOpacity(0.5)
+                    : Colors.deepPurpleAccent,
+              ),
+            );
+          },
         ),
       ),
     );

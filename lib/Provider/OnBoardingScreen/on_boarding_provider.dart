@@ -1,8 +1,12 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 import '../../Barrel/app_barrel.dart';
 
 class OnBoardingProvider with ChangeNotifier {
+  final ImagePicker _profilePicturePicker = ImagePicker();
+
   int _tabIndex = 0;
   String _email = '';
   String _password = '';
@@ -61,70 +65,74 @@ class OnBoardingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // handling userProfilePicture
-
-  //######################  Profile Picture Picking   #################33
-
-  final ImagePicker _profilePicturepicker = ImagePicker();
-  File? profilePicture;
-  bool isPicturePicked = false;
-  CroppedFile? croppedFile;
-
-  Future<void> getPorfileImage(bool isCamera) async {
-    final pickedFile = await _profilePicturepicker.pickImage(
+  Future<String?> getProfileImage(bool isCamera) async {
+    try {
+      final pickedFile = await _profilePicturePicker.pickImage(
         source: isCamera ? ImageSource.camera : ImageSource.gallery,
-        maxWidth: 200.0,
-        maxHeight: 300.0);
-    if (pickedFile != null) {
-      profilePicture = File(pickedFile.path);
-      // uploadprofilePicture();
-      croppedFile = await ImageCropper().cropImage(
+        preferredCameraDevice: CameraDevice.rear,
+      );
+      if (pickedFile != null) {
+        final croppedFile = await ImageCropper().cropImage(
           aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-          sourcePath: profilePicture!.path,
-          cropStyle: CropStyle.circle);
-      _photoLocation = croppedFile!.path;
-      // isPicturePicked = true;
-      notifyListeners();
-    } else {
-      print('No Image Selected');
+          sourcePath: pickedFile.path,
+          compressQuality: 100,
+        );
+        if (croppedFile != null) {
+          _photoLocation = croppedFile.path;
+          notifyListeners();
+          return null;
+        } else {
+          return 'Image not cropped';
+        }
+      } else {
+        if (kDebugMode) {
+          print('No Image Selected');
+        }
+        return 'No Image Selected';
+      }
+    } on PlatformException catch (e) {
+      return e.message;
     }
   }
 
-  // ########## uploading the selected picture to fireStorage #######
-
-  void uploadprofilePicture() {
+  void uploadProfilePicture() {
     FirebaseStorage.instance
         .ref()
-        .child('users/${Uri.file(profilePicture!.path).pathSegments.last}')
-        .putFile(File(profilePicture!.path))
+        .child('users/${Uri.file(_photoLocation).pathSegments.last}')
+        .putFile(File(_photoLocation))
         .then((value) {
       value.ref.getDownloadURL().then((value) {
-        print(value);
-        //      getUserData();
-        updateprofilePicture(
+        updateProfilePicture(
           profilePicture: value,
         );
       }).catchError((error) {
-        print('my error is: ');
+        if (kDebugMode) {
+          print('Profile Upload Error: ');
+        }
 
-        print(error.toString());
+        if (kDebugMode) {
+          print(error.toString());
+        }
       });
     }).catchError((error) {
-      print('error is: ');
-      print(error.toString());
-      // print(error.toString());
+      if (kDebugMode) {
+        print('Upload Error is: ');
+        print(error.toString());
+      }
     });
   }
 
-  // ######### updating the PoriflePicture field in users Collection for respective user ############
-  void updateprofilePicture({required String profilePicture}) {
+  void updateProfilePicture({required String profilePicture}) {
     FirebaseFirestore.instance
         .collection('users')
         .doc('uId')
         .update({"profilePicture": profilePicture}).then((value) {
       //getUserData();
     }).catchError((error) {
-      print(error.toString());
+      if (kDebugMode) {
+        print('Update Error is: ');
+        print(error.toString());
+      }
     });
   }
 }
