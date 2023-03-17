@@ -33,13 +33,13 @@ late  String uId;
 
 Map<String,dynamic> toMap(){
  return {
-firstName:'firstName',
-  lastName:'lastName',
-  email:'email',
-  uId:'uId',
-  profilePicture :'profilePicture',
-  level:'level' ,
-  currentExperience : 'currentExperience',
+  'firstName':firstName,
+  'lastName':lastName,
+ 'email': email,
+  'uId':uId,
+  'profilePicture':profilePicture ,
+ 'level' : level,
+   'currentExperience':currentExperience ,
   };
 }
 
