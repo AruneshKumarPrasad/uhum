@@ -49,6 +49,7 @@ dependencies:
   firebase_storage: ^11.0.15
   image_cropper: ^3.0.1
   flutter_spinkit: ^5.1.0
+  path: ^1.8.2
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +91,7 @@ flutter:
     - assets/Splash/images/bookcard.png
     - assets/OnBoarding/
     - assets/OnBoarding/ProfilePicture.jpg
+    - assets/OnBoarding/Done.json
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:path/path.dart' as p;
 
 import '../../Barrel/app_barrel.dart';
 
@@ -9,21 +10,21 @@ class OnBoardingProvider with ChangeNotifier {
 
   int _tabIndex = 0;
   String _email = '';
-  String _password = '';
+  String _uid = '';
   String _firstName = '';
   String _lastname = '';
   String _photoLocation = '';
+  String _photoURL = '';
   bool _isImageLoading = false;
-  bool _isDone = false;
 
   int get tabIndex => _tabIndex;
   String get email => _email;
-  String get password => _password;
+  String get uid => _uid;
   String get firstName => _firstName;
   String get lastname => _lastname;
   String get photoLocation => _photoLocation;
+  String get photoURL => _photoURL;
   bool get isImageLoading => _isImageLoading;
-  bool get isDone => _isDone;
 
   void updateTabIndex(int value) {
     _tabIndex = value;
@@ -35,8 +36,8 @@ class OnBoardingProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updatePassword(String value) {
-    _password = value;
+  void updateUID(String value) {
+    _uid = value;
     notifyListeners();
   }
 
@@ -57,11 +58,6 @@ class OnBoardingProvider with ChangeNotifier {
 
   void updateImageLoading(bool value) {
     _isImageLoading = value;
-    notifyListeners();
-  }
-
-  void updateDone(bool value) {
-    _isDone = value;
     notifyListeners();
   }
 
@@ -95,44 +91,45 @@ class OnBoardingProvider with ChangeNotifier {
     }
   }
 
-  void uploadProfilePicture() {
-    FirebaseStorage.instance
+  Future<String?> uploadProfilePicture() async {
+    final String fileExtension = p.extension(_photoLocation);
+    final Reference ref = FirebaseStorage.instance
         .ref()
-        .child('users/${Uri.file(_photoLocation).pathSegments.last}')
-        .putFile(File(_photoLocation))
-        .then((value) {
-      value.ref.getDownloadURL().then((value) {
-        updateProfilePicture(
-          profilePicture: value,
-        );
-      }).catchError((error) {
-        if (kDebugMode) {
-          print('Profile Upload Error: ');
-        }
-
-        if (kDebugMode) {
-          print(error.toString());
-        }
-      });
-    }).catchError((error) {
+        .child('users/$_uid/profile/ProfilePicture$fileExtension');
+    try {
+      final UploadTask uploadTask = ref.putFile(File(_photoLocation));
+      await uploadTask;
+    } on FirebaseException catch (error) {
       if (kDebugMode) {
-        print('Upload Error is: ');
-        print(error.toString());
+        print('Firebase Storage Error: ${error.message}');
       }
-    });
+      return error.message;
+    } catch (error) {
+      rethrow;
+    }
+
+    try {
+      final url = await ref.getDownloadURL();
+      _photoURL = url;
+      notifyListeners();
+      await _updateProfilePicture(profilePicture: url);
+    } catch (error) {
+      if (kDebugMode) {
+        print('Profile Upload Error: $error');
+      }
+      return error.toString();
+    }
+    return null;
   }
 
-  void updateProfilePicture({required String profilePicture}) {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc('uId')
-        .update({"profilePicture": profilePicture}).then((value) {
-      //getUserData();
-    }).catchError((error) {
-      if (kDebugMode) {
-        print('Update Error is: ');
-        print(error.toString());
-      }
-    });
+  Future<void> _updateProfilePicture({required String profilePicture}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_uid)
+          .update({"profilePicture": profilePicture});
+    } catch (error) {
+      rethrow;
+    }
   }
 }

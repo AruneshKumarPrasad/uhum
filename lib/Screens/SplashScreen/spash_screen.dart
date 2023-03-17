@@ -19,9 +19,9 @@ class _SplashScreenState extends State<SplashScreen>
 
   void reDirector() {
     Timer(const Duration(seconds: 2), () async {
-      await UserServices.instance.getUserId().then((value) async {
-        if (value != "") {
-          await UserServices.instance.checkIfOnBoarded(value).then((value) {
+      await UserServices.instance.getUserId().then((resultUID) async {
+        if (resultUID != "") {
+          await UserServices.instance.checkIfOnBoarded(resultUID).then((value) {
             if (value) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
@@ -39,8 +39,8 @@ class _SplashScreenState extends State<SplashScreen>
                 MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider(
                     create: (context) => OnBoardingProvider(),
-                    child: const OnBoardingScreen(
-                      userCredMap: null,
+                    child: OnBoardingScreen(
+                      uid: resultUID,
                     ),
                   ),
                 ),

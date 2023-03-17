@@ -130,7 +130,7 @@ class UserServices {
     }
   }
 
-  Future<void> saveUser({
+  Future<String?> saveUserToFireStore({
     required String firstName,
     required String lastName,
     required String profilePicture,
@@ -151,11 +151,19 @@ class UserServices {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(uId)
-          .set(userModel.toMap());
+          .update(userModel.toMap());
     } on FirebaseException catch (e) {
-      print(e.toString());
-      return null;
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return e.toString();
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return e.toString();
     }
+    return null;
   }
 
   Future<bool> checkIfOnBoarded(String uid) async {

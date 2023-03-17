@@ -1,16 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uhum/Repository/user_services.dart';
+import 'package:uhum/Screens/OnBoardingScreen/Fragments/profile_done_fragment.dart';
+
 import '../../Barrel/app_barrel.dart';
 import 'Fragments/profile_info_fragment.dart';
 import 'Fragments/profile_photo_fragment.dart';
 import 'widgets/nav_bar_widget.dart';
-import 'widgets/tab_label_widget.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({
     super.key,
-    required this.userCredMap,
+    required this.uid,
   });
 
-  final Map<String, String>? userCredMap;
+  final String uid;
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -35,10 +38,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
     _tabController = TabController(length: 3, vsync: this);
     Future.delayed(const Duration(milliseconds: 0)).then((value) {
       final provider = Provider.of<OnBoardingProvider>(context, listen: false);
-      if (widget.userCredMap != null) {
-        provider.updateEmail(widget.userCredMap!['email']!);
-        provider.updatePassword(widget.userCredMap!['password']!);
-      }
+      provider.updateUID(widget.uid);
       if (provider.firstName != '' && provider.lastname != '') {
         _firstnameController.text = provider.firstName;
         _lastnameController.text = provider.lastname;
@@ -76,10 +76,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                     lastnameController: _lastnameController,
                   ),
                   const ProfilePhotoFragment(),
-                  const Center(
-                    child: TabLabelWidget(
-                      label: '3',
-                    ),
+                  ProfileDoneFragment(
+                    mediaProp: mediaProp,
                   ),
                 ],
               ),
@@ -90,7 +88,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_tabController.index == 0 &&
                         (_firstnameController.text.trim().length >= 2 &&
                             _lastnameController.text.trim().length >= 2)) {
@@ -114,7 +112,79 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                               Text('Names must be at least 2 characters long!'),
                         ),
                       );
-                    } else {
+                    } else if (_tabController.index == 1 &&
+                        provider.photoLocation != '') {
+                      _scrollToNextTab();
+                      provider.updateTabIndex(_tabController.index);
+                    } else if (_tabController.index == 1 &&
+                        provider.photoLocation == '') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(milliseconds: 1200),
+                          behavior: SnackBarBehavior.floating,
+                          content: Text('An Image must be Picked!'),
+                        ),
+                      );
+                    } else if (_tabController.index == 2) {
+                      if (provider.firstName != '' &&
+                          provider.lastname != '' &&
+                          provider.photoLocation != '') {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                        print('Starting Now!');
+                        await provider
+                            .uploadProfilePicture()
+                            .then((value) async {
+                          if (value == null) {
+                            await UserServices.instance
+                                .saveUserToFireStore(
+                              firstName: provider.firstName,
+                              lastName: provider.lastname,
+                              profilePicture: provider.photoURL,
+                              uId: provider.uid,
+                              email: FirebaseAuth.instance.currentUser!.email!,
+                            )
+                                .then((value) {
+                              if (value != null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    duration:
+                                        const Duration(milliseconds: 1200),
+                                    behavior: SnackBarBehavior.floating,
+                                    content: Text(value),
+                                  ),
+                                );
+                              } else {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => const Homepage(),
+                                  ),
+                                );
+                              }
+                            });
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: const Duration(milliseconds: 1200),
+                                behavior: SnackBarBehavior.floating,
+                                content: Text(value),
+                              ),
+                            );
+                          }
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            duration: Duration(milliseconds: 1200),
+                            behavior: SnackBarBehavior.floating,
+                            content: Text('Some Field is left Empty!'),
+                          ),
+                        );
+                      }
                       _scrollToNextTab();
                       provider.updateTabIndex(_tabController.index);
                     }

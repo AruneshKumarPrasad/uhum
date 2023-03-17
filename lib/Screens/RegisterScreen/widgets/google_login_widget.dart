@@ -16,10 +16,10 @@ class GoogleLoginWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         await UserServices.instance.signInWithGoogle().then(
-          (value) async {
-            if (value['error'] == null) {
+          (result) async {
+            if (result['error'] == null) {
               await UserServices.instance
-                  .checkIfOnBoarded(value['user'].uid)
+                  .checkIfOnBoarded(result['user'].uid)
                   .then((value) {
                 if (value) {
                   Navigator.of(context).pushReplacement(
@@ -32,8 +32,8 @@ class GoogleLoginWidget extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => ChangeNotifierProvider(
                         create: (context) => OnBoardingProvider(),
-                        child: const OnBoardingScreen(
-                          userCredMap: null,
+                        child: OnBoardingScreen(
+                          uid: result['user'].uid,
                         ),
                       ),
                     ),
@@ -52,7 +52,7 @@ class GoogleLoginWidget extends StatelessWidget {
                   duration: const Duration(milliseconds: 1200),
                   behavior: SnackBarBehavior.floating,
                   content: Text(
-                    value['error'],
+                    result['error'],
                   ),
                 ),
               );

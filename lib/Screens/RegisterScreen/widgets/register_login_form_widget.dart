@@ -142,12 +142,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
                                   builder: (context) => ChangeNotifierProvider(
                                     create: (context) => OnBoardingProvider(),
                                     child: OnBoardingScreen(
-                                      userCredMap: {
-                                        'email': _emailController.text
-                                            .trim()
-                                            .toLowerCase(),
-                                        'password': _passwordController.text,
-                                      },
+                                      uid: resultUser.uid,
                                     ),
                                   ),
                                 ),
@@ -179,17 +174,13 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               _passwordController.text)
                           .then((value) {
                         if (value['error'] == null) {
+                          final resultUser = value['user']! as User;
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => ChangeNotifierProvider(
                                 create: (context) => OnBoardingProvider(),
                                 child: OnBoardingScreen(
-                                  userCredMap: {
-                                    'email': _emailController.text
-                                        .trim()
-                                        .toLowerCase(),
-                                    'password': _passwordController.text,
-                                  },
+                                  uid: resultUser.uid,
                                 ),
                               ),
                             ),
