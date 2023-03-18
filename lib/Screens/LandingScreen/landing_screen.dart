@@ -14,7 +14,6 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     final Size mediaProp = MediaQuery.of(context).size;
-
     return SafeArea(
       child: Scaffold(
         body: Background(mediaProp: mediaProp, child: [

@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uhum/Discover.dart';
+import 'package:uhum/Repository/user_services.dart';
+import 'package:uhum/Screens/LandingScreen/landing_screen.dart';
 import 'package:uhum/sharepge.dart';
 
 class Main_page_view extends StatefulWidget {
@@ -113,6 +114,7 @@ class _HomepageState extends State<Homepage> {
     'Holistic wellbeing'
   ];
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
@@ -225,9 +227,14 @@ class _HomepageState extends State<Homepage> {
                           Icons.notifications_none_rounded,
                         ),
                         onPressed: () {
-                          setState(() {
-                            counter = 0;
-                          });
+                          UserServices.instance.signOut().then(
+                                (value) =>
+                                    Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => LandingScreen(),
+                                  ),
+                                ),
+                              );
                         }),
                     counter != 0
                         ? Positioned(

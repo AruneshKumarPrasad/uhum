@@ -135,18 +135,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                             child: CircularProgressIndicator(),
                           ),
                         );
-                        print('Starting Now!');
                         await provider
                             .uploadProfilePicture()
                             .then((value) async {
                           if (value == null) {
+                            final FirebaseAuth auth = FirebaseAuth.instance;
                             await UserServices.instance
                                 .saveUserToFireStore(
                               firstName: provider.firstName,
                               lastName: provider.lastname,
                               profilePicture: provider.photoURL,
                               uId: provider.uid,
-                              email: FirebaseAuth.instance.currentUser!.email!,
+                              email: auth.currentUser!.email!,
                             )
                                 .then((value) {
                               if (value != null) {

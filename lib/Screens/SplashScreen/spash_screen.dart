@@ -124,7 +124,7 @@ class _SplashScreenState extends State<SplashScreen>
                               width: 100,
                             ),
                             Text(
-                              'Ahum',
+                              'Uhum',
                               style: TextStyle(
                                 fontSize: 36,
                                 fontWeight: FontWeight.bold,
