@@ -26,17 +26,21 @@ class GoogleLoginWidget extends StatelessWidget {
         await UserServices.instance.signInWithGoogle().then(
           (result) async {
             if (result['error'] == null) {
-              context.read<UserProvider>().updateCurrentUser(result['user']);
               await UserServices.instance
                   .checkIfOnBoarded(result['user'].uid)
-                  .then((value) {
+                  .then((value) async {
                 if (value) {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const Homepage(),
-                    ),
-                  );
+                  await context
+                      .read<UserProvider>()
+                      .fetchAndAssignCurrentUser(result['user'].uid)
+                      .then((value) {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const Homepage(),
+                      ),
+                    );
+                  });
                 } else {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(

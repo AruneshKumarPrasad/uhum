@@ -139,15 +139,12 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               _passwordController.text)
                           .then((value) async {
                         if (value['error'] == null) {
-                          context
-                              .read<UserProvider>()
-                              .updateCurrentUser(value['user']!);
                           final resultUser = value['user']! as User;
                           await UserServices.instance
                               .checkIfOnBoarded(resultUser.uid)
-                              .then((value) {
+                              .then((valueBool) async {
                             Navigator.pop(context);
-                            if (!value) {
+                            if (!valueBool) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ChangeNotifierProvider(
@@ -159,11 +156,17 @@ class RegisterLoginFormWidget extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => const Homepage(),
-                                ),
-                              );
+                              await context
+                                  .read<UserProvider>()
+                                  .fetchAndAssignCurrentUser(value['user'].uid)
+                                  .then((value) {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => const Homepage(),
+                                  ),
+                                );
+                              });
                             }
                           });
                         } else {
