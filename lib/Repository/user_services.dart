@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Models/userModel.dart';
+import '../Models/user_model.dart';
 
 class UserServices {
   static final UserServices instance = UserServices._internal();
