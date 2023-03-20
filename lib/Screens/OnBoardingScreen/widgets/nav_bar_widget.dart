@@ -1,7 +1,5 @@
-import 'package:uhum/Screens/OnBoardingScreen/widgets/tab_label_widget.dart';
-
 import '../../../Barrel/app_barrel.dart';
-import '../../../Provider/OnBoardingScreen/on_boarding_provider.dart';
+import 'tab_label_widget.dart';
 
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   const AppBarWidget({

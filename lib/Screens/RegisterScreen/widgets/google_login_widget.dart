@@ -1,5 +1,6 @@
+import 'package:uhum/Screens/OnBoardingScreen/widgets/register_loader_widget.dart';
+
 import '../../../Barrel/app_barrel.dart';
-import '../../../Repository/user_services.dart';
 
 class GoogleLoginWidget extends StatelessWidget {
   const GoogleLoginWidget({
@@ -15,6 +16,13 @@ class GoogleLoginWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => RegisterLoaderWidget(
+            mediaProp: mediaProp,
+            isLogin: true,
+          ),
+        );
         await UserServices.instance.signInWithGoogle().then(
           (result) async {
             if (result['error'] == null) {
@@ -22,12 +30,14 @@ class GoogleLoginWidget extends StatelessWidget {
                   .checkIfOnBoarded(result['user'].uid)
                   .then((value) {
                 if (value) {
+                  Navigator.of(context).pop();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => const Homepage(),
                     ),
                   );
                 } else {
+                  Navigator.of(context).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ChangeNotifierProvider(
@@ -56,6 +66,7 @@ class GoogleLoginWidget extends StatelessWidget {
                   ),
                 ),
               );
+              Navigator.of(context).pop();
             }
           },
         );

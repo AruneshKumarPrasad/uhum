@@ -1,7 +1,4 @@
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import '../../../Barrel/app_barrel.dart';
-import '../../GlobalWidgets/image_selector_widget.dart';
 
 class ProfileImagePickerWidget extends StatelessWidget {
   const ProfileImagePickerWidget({
@@ -91,18 +88,7 @@ class ProfileImagePickerWidget extends StatelessWidget {
             Radius.circular(15),
           ),
         ),
-        child: SpinKitFoldingCube(
-          size: 40,
-          itemBuilder: (BuildContext context, int index) {
-            return DecoratedBox(
-              decoration: BoxDecoration(
-                color: index.isEven
-                    ? Colors.deepPurpleAccent.shade100.withOpacity(0.5)
-                    : Colors.deepPurpleAccent,
-              ),
-            );
-          },
-        ),
+        child: const CustomLoadingWidget(),
       ),
     );
   }

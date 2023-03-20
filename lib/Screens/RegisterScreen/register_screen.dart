@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:uhum/Screens/RegisterScreen/widgets/register_login_form_widget.dart';
-import 'package:uhum/Screens/RegisterScreen/widgets/socail_login_widget.dart';
+import '../../Barrel/app_barrel.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

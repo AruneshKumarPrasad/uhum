@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:uhum/Repository/user_services.dart';
-import 'package:uhum/Screens/OnBoardingScreen/Fragments/profile_done_fragment.dart';
-
 import '../../Barrel/app_barrel.dart';
+import 'Fragments/profile_done_fragment.dart';
 import 'Fragments/profile_info_fragment.dart';
 import 'Fragments/profile_photo_fragment.dart';
 import 'widgets/nav_bar_widget.dart';
+import 'widgets/register_loader_widget.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({
@@ -131,8 +129,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                           provider.photoLocation != '') {
                         showModalBottomSheet(
                           context: context,
-                          builder: (context) => const Center(
-                            child: CircularProgressIndicator(),
+                          builder: (context) => RegisterLoaderWidget(
+                            mediaProp: mediaProp,
                           ),
                         );
                         await provider

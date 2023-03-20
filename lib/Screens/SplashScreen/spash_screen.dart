@@ -1,9 +1,6 @@
-import 'dart:async';
 import 'dart:ui';
 
 import '../../Barrel/app_barrel.dart';
-import '../../Repository/user_services.dart';
-import '../LandingScreen/landing_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

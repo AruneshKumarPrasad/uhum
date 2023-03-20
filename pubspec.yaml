@@ -92,6 +92,8 @@ flutter:
     - assets/OnBoarding/
     - assets/OnBoarding/ProfilePicture.jpg
     - assets/OnBoarding/Done.json
+    - assets/OnBoarding/Builder.json
+    - assets/Login/Login.json
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

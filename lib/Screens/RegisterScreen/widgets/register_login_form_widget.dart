@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:uhum/Repository/user_services.dart';
-import 'package:uhum/Screens/RegisterScreen/widgets/register_textfield_widget.dart';
+import 'package:uhum/Screens/RegisterScreen/widgets/register_text_field_widget.dart';
 
 import '../../../Barrel/app_barrel.dart';
+import '../../OnBoardingScreen/widgets/register_loader_widget.dart';
 
 class RegisterLoginFormWidget extends StatelessWidget {
   RegisterLoginFormWidget({
@@ -19,10 +18,12 @@ class RegisterLoginFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaProp = MediaQuery.of(context).size;
+
     String? validateEmail(String? value) {
       if (value == null || value.isEmpty) {
         return 'Please enter an email address';
-      } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+      } else if (!RegExp(r"^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(value)) {
         return 'Please enter a valid email address';
       }
       return null;
@@ -41,7 +42,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
       if (value.contains(' ')) {
         return 'Password cannot contain spaces';
       }
-      if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[0-9]).{8,28}$').hasMatch(value)) {
+      if (!RegExp(r'^(?=.*?[A-Z])(?=.*?\d).{8,28}$').hasMatch(value)) {
         return 'Password must have at least one capital letter and one number';
       }
       return null;
@@ -119,12 +120,19 @@ class RegisterLoginFormWidget extends StatelessWidget {
           ),
           SizedBox(
             height: 75,
-            width: MediaQuery.of(context).size.width * 1.2,
+            width: mediaProp.width * 1.2,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: ElevatedButton(
                 onPressed: () async {
                   if (formValidate()) {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => RegisterLoaderWidget(
+                        mediaProp: mediaProp,
+                        isLogin: isLogin,
+                      ),
+                    );
                     if (isLogin) {
                       await UserServices.instance
                           .loginWithEmail(
@@ -136,6 +144,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
                           await UserServices.instance
                               .checkIfOnBoarded(resultUser.uid)
                               .then((value) {
+                            Navigator.pop(context);
                             if (!value) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
@@ -165,6 +174,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               ),
                             ),
                           );
+                          Navigator.pop(context);
                         }
                       });
                     } else {
@@ -175,6 +185,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
                           .then((value) {
                         if (value['error'] == null) {
                           final resultUser = value['user']! as User;
+                          Navigator.pop(context);
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => ChangeNotifierProvider(
@@ -195,6 +206,7 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               ),
                             ),
                           );
+                          Navigator.of(context).pop();
                         }
                       });
                     }

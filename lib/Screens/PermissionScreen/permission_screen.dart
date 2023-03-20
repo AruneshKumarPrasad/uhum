@@ -1,7 +1,4 @@
-import 'package:uhum/Screens/GlobalWidgets/background_widget.dart';
-
 import '../../Barrel/app_barrel.dart';
-import '../../Homepage.dart';
 
 class PermissionScreen extends StatelessWidget {
   const PermissionScreen({Key? key}) : super(key: key);

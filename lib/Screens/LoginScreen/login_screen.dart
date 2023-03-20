@@ -1,6 +1,4 @@
 import '../../Barrel/app_barrel.dart';
-import '../RegisterScreen/widgets/register_login_form_widget.dart';
-import '../RegisterScreen/widgets/socail_login_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
