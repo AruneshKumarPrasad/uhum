@@ -146,7 +146,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                               uId: provider.uid,
                               email: auth.currentUser!.email!,
                             )
-                                .then((value) {
+                                .then((value) async {
                               if (value != null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -157,11 +157,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                                   ),
                                 );
                               } else {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => const Homepage(),
-                                  ),
-                                );
+                                await context
+                                    .read<UserProvider>()
+                                    .fetchAndAssignCurrentUser(provider.uid)
+                                    .then((_) {
+                                  // TODO: Implement Fetch Fail
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => const Homepage(),
+                                    ),
+                                  );
+                                });
                               }
                             });
                           } else {

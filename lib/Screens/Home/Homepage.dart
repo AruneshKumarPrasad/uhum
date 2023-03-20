@@ -116,12 +116,9 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        child: CustomScrollView(
+    return SafeArea(
+      child: Scaffold(
+        body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
               centerTitle: false,

@@ -174,6 +174,30 @@ class UserServices {
     return null;
   }
 
+  Future<UserModel?> getUserFromFireStore(String uid) async {
+    try {
+      final DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+      if (!userDoc.exists) {
+        return null;
+      }
+
+      final UserModel userModel = UserModel.fromMap(userDoc.data()!);
+      return userModel;
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return null;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return null;
+    }
+  }
+
   Future<bool> checkIfOnBoarded(String uid) async {
     try {
       final userDoc =

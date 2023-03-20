@@ -18,13 +18,21 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(const Duration(seconds: 2), () async {
       await UserServices.instance.getUserId().then((resultUID) async {
         if (resultUID != "") {
-          await UserServices.instance.checkIfOnBoarded(resultUID).then((value) {
+          await UserServices.instance
+              .checkIfOnBoarded(resultUID)
+              .then((value) async {
             if (value) {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const Homepage(),
-                ),
-              );
+              await context
+                  .read<UserProvider>()
+                  .fetchAndAssignCurrentUser(resultUID)
+                  .then((_) {
+                // TODO: Implement Fetch Fail
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const Homepage(),
+                  ),
+                );
+              });
             } else {
               Navigator.pushReplacement(
                 context,
@@ -121,7 +129,7 @@ class _SplashScreenState extends State<SplashScreen>
                               width: 100,
                             ),
                             Text(
-                              'Uhum',
+                              'Ahum',
                               style: TextStyle(
                                 fontSize: 36,
                                 fontWeight: FontWeight.bold,

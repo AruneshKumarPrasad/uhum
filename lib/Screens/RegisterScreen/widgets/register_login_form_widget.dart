@@ -1,7 +1,6 @@
-import 'package:uhum/Screens/RegisterScreen/widgets/register_text_field_widget.dart';
-
 import '../../../Barrel/app_barrel.dart';
 import '../../OnBoardingScreen/widgets/register_loader_widget.dart';
+import 'register_text_field_widget.dart';
 
 class RegisterLoginFormWidget extends StatelessWidget {
   RegisterLoginFormWidget({
@@ -140,6 +139,9 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               _passwordController.text)
                           .then((value) async {
                         if (value['error'] == null) {
+                          context
+                              .read<UserProvider>()
+                              .updateCurrentUser(value['user']!);
                           final resultUser = value['user']! as User;
                           await UserServices.instance
                               .checkIfOnBoarded(resultUser.uid)
@@ -184,6 +186,9 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               _passwordController.text)
                           .then((value) {
                         if (value['error'] == null) {
+                          context
+                              .read<UserProvider>()
+                              .updateCurrentUser(value['user']!);
                           final resultUser = value['user']! as User;
                           Navigator.pop(context);
                           Navigator.of(context).push(

@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:uhum/Provider/Global/user_provider.dart';
 import 'package:uhum/Screens/SplashScreen/spash_screen.dart';
 
 Future<void> main() async {
@@ -14,14 +16,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Uhum',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Ahum',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          primarySwatch: Colors.blue,
+        ),
+        home: const SplashScreen(),
       ),
-      home: const SplashScreen(),
     );
   }
 }

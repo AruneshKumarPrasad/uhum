@@ -16,14 +16,14 @@ class UserModel {
       required this.currentExperience,
       required this.uId});
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    email = json['email'];
-    uId = json['uId'];
-    profilePicture = json['profilePicture'];
-    level = json['level'];
-    currentExperience = json['currentExperience'];
+  UserModel.fromMap(Map<String, dynamic> map) {
+    firstName = map['firstName'];
+    lastName = map['lastName'];
+    email = map['email'];
+    uId = map['uId'];
+    profilePicture = map['profilePicture'];
+    level = map['level'];
+    currentExperience = map['currentExperience'];
   }
 
   Map<String, dynamic> toMap() {
