@@ -1,9 +1,10 @@
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uhum/Barrel/app_barrel.dart';
 
-import '../../../Barrel/app_barrel.dart';
+import '../../../sharepge.dart';
 
-class MySliverAppBar extends StatelessWidget {
-  const MySliverAppBar({
+class MySliverAppBarWidget extends StatelessWidget {
+  const MySliverAppBarWidget({
     super.key,
     required this.mediaProp,
   });
@@ -41,6 +42,13 @@ class MySliverAppBar extends StatelessWidget {
                   ),
                   onPressed: () {
                     // Sign-out logic
+                    UserServices.instance.signOut().then(
+                          (value) => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => LandingScreen(),
+                            ),
+                          ),
+                        );
                   },
                 ),
               ),
@@ -72,13 +80,34 @@ class MySliverAppBar extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        // Read More logic
-                      },
-                      child: Text(
-                        'Read More',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      height: mediaProp.height * 0.04,
+                      width: mediaProp.width * 0.2,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: TextButton(
+                          onPressed: () {
+                            // Read More logic
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const sharepge(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Read More',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                        ),
                       ),
                     ),
                   ],

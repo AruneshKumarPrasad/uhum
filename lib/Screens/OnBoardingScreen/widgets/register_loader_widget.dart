@@ -37,7 +37,7 @@ class RegisterLoaderWidget extends StatelessWidget {
             height: mediaProp.height * 0.25,
           ),
           SizedBox(
-            height: mediaProp.height * 0.05,
+            height: mediaProp.height * 0.02,
           ),
           const CustomLoadingWidget(),
         ],

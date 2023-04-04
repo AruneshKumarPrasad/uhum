@@ -158,7 +158,7 @@ class _DiscoverState extends State<Discover> {
                         ),
                         onPressed: () {
                           setState(() {
-                            counter = 0;
+                            counter = 1;
                           });
                         }),
                     counter != 0
@@ -371,6 +371,45 @@ class _DiscoverState extends State<Discover> {
                                   borderRadius: BorderRadius.circular(15),
                                   image: DecorationImage(
                                       image: AssetImage(images3[index]),
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Relationships',
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w500)),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 115.0,
+                        child: ListView.builder(
+                          physics: ClampingScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: images2.length,
+                          itemBuilder: (BuildContext context, int index) =>
+                              Card(
+                            color: Colors.grey[900],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.all(10),
+                                width: 95,
+                                height: 115,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                      image: AssetImage(images2[index]),
                                       fit: BoxFit.cover),
                                 ),
                               ),

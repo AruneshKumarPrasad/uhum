@@ -164,7 +164,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                                   // TODO: Implement Fetch Fail
                                   Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                      builder: (context) => const Homepage(),
+                                      builder: (context) => HomeScreen(),
                                     ),
                                   );
                                 });

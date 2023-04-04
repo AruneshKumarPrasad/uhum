@@ -3,7 +3,7 @@ import '../../Models/user_model.dart';
 
 class UserProvider with ChangeNotifier {
   UserModel? _currentUser;
-  get currentUser => _currentUser;
+  UserModel? get currentUser => _currentUser;
   void updateCurrentUser(UserModel value) {
     _currentUser = value;
     notifyListeners();

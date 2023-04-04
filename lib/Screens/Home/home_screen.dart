@@ -22,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final mediaProp = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        drawer: Drawer(),
         body: PageView(
           controller: _pageController,
           children: [
@@ -35,8 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: (int index) {
-            _pageController.animateToPage(index,
-                duration: Duration(microseconds: 1000), curve: Curves.easeIn);
+            _pageController.animateToPage(
+              index,
+              duration: Duration(milliseconds: 250),
+              curve: Curves.linear,
+            );
           },
           selectedIndex: currentPageIndex,
           destinations: [
@@ -46,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
               label: 'Home',
             ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.favorite_rounded),
+              selectedIcon: Icon(Icons.explore_rounded),
               icon: Icon(
-                Icons.favorite_outline_rounded,
+                Icons.explore_outlined,
               ),
-              label: 'Meditation',
+              label: 'Discover',
             ),
             // NavigationDestination(
             //   selectedIcon: Icon(Icons.favorite_rounded),

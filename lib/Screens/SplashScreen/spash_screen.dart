@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
                 // TODO: Implement Fetch Fail
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => const Homepage(),
+                    builder: (context) => HomeScreen(),
                   ),
                 );
               });

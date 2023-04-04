@@ -15,7 +15,7 @@ export 'package:uhum/Repository/user_services.dart';
 export 'package:uhum/Screens/GlobalWidgets/background_widget.dart';
 export 'package:uhum/Screens/GlobalWidgets/custom_loading_widget.dart';
 export 'package:uhum/Screens/GlobalWidgets/image_selector_widget.dart';
-export 'package:uhum/Screens/Home/Homepage.dart';
+export 'package:uhum/Screens/Home/home_screen.dart';
 export 'package:uhum/Screens/LandingScreen/landing_screen.dart';
 export 'package:uhum/Screens/LoginScreen/login_screen.dart';
 export 'package:uhum/Screens/OnBoardingScreen/on_boarding_screen.dart';
