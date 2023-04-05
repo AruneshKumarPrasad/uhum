@@ -1,5 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uhum/Barrel/app_barrel.dart';
+import 'package:uhum/Screens/Home/widgets/log_out_loader_widget.dart';
 
 import '../../../sharepge.dart';
 
@@ -40,9 +41,17 @@ class MySliverAppBarWidget extends StatelessWidget {
                     Icons.logout,
                     color: Colors.white,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     // Sign-out logic
-                    UserServices.instance.signOut().then(
+
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => LogoutLoaderWidget(
+                        mediaProp: mediaProp,
+                      ),
+                    );
+                    await Future.delayed(Duration(seconds: 2));
+                    await UserServices.instance.signOut().then(
                           (value) => Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => LandingScreen(),

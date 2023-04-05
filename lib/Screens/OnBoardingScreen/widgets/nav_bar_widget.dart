@@ -1,7 +1,7 @@
 import '../../../Barrel/app_barrel.dart';
 import 'tab_label_widget.dart';
 
-class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
+class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({
     super.key,
     required TabController tabController,
