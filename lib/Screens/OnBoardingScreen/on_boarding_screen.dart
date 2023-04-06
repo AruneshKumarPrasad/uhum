@@ -13,6 +13,8 @@ class OnBoardingScreen extends StatefulWidget {
 
   final String uid;
 
+  static const String routeName = '/OnBoardingScreen';
+
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }

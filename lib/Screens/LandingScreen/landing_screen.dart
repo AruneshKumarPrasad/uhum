@@ -4,6 +4,7 @@ import 'package:uhum/Screens/LandingScreen/widgets/register_page_view_widget.dar
 import '../../Barrel/app_barrel.dart';
 
 class LandingScreen extends StatefulWidget {
+  static const String routeName = '/LandingScreen';
   const LandingScreen({Key? key}) : super(key: key);
 
   @override

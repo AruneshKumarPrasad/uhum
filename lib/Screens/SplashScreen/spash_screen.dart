@@ -4,7 +4,7 @@ import '../../Barrel/app_barrel.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
+  static const String routeName = '/';
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -22,43 +22,24 @@ class _SplashScreenState extends State<SplashScreen>
               .checkIfOnBoarded(resultUID)
               .then((value) async {
             if (value) {
+              // TODO: Implement Fetch Fail
               await context
                   .read<UserProvider>()
                   .fetchAndAssignCurrentUser(resultUID)
                   .then((_) {
                 // TODO: Implement Fetch Fail
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
-                  ),
-                );
+                Navigator.of(context)
+                    .pushReplacementNamed(HomeScreen.routeName);
               });
             } else {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LandingScreen(),
-                ),
-              );
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider(
-                    create: (context) => OnBoardingProvider(),
-                    child: OnBoardingScreen(
-                      uid: resultUID,
-                    ),
-                  ),
-                ),
-              );
+              Navigator.of(context)
+                  .pushReplacementNamed(LandingScreen.routeName);
+              Navigator.of(context)
+                  .pushNamed(OnBoardingScreen.routeName, arguments: resultUID);
             }
           });
         } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const LandingScreen(),
-            ),
-          );
+          Navigator.of(context).pushReplacementNamed(LandingScreen.routeName);
         }
       });
     });

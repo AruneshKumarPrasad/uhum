@@ -1,8 +1,10 @@
+import 'package:uhum/Screens/Home/Fragments/meditation_page_fragment.dart';
+
 import '../../Barrel/app_barrel.dart';
-import '../../Discover.dart';
 import 'Fragments/home_page_fragment.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const String routeName = '/HomeScreen';
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -26,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: _pageController,
           children: [
             HomePageFragment(mediaProp: mediaProp),
-            Discover(),
+            MeditationPageFragment(mediaProp: mediaProp),
           ],
           onPageChanged: (index) {
             onPageChange(index);
@@ -48,19 +50,12 @@ class _HomeScreenState extends State<HomeScreen> {
               label: 'Home',
             ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.explore_rounded),
+              selectedIcon: Icon(Icons.favorite_rounded),
               icon: Icon(
-                Icons.explore_outlined,
+                Icons.favorite_outline_rounded,
               ),
-              label: 'Discover',
+              label: 'Meditation',
             ),
-            // NavigationDestination(
-            //   selectedIcon: Icon(Icons.favorite_rounded),
-            //   icon: Icon(
-            //     Icons.favorite_outline_rounded,
-            //   ),
-            //   label: 'Meditation',
-            // ),
             // NavigationDestination(
             //   selectedIcon: Icon(Icons.bookmark),
             //   icon: Icon(Icons.bookmark_border),

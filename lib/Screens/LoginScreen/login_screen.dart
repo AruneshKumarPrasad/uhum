@@ -1,6 +1,7 @@
 import '../../Barrel/app_barrel.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String routeName = "/LoginScreen";
   const LoginScreen({super.key});
 
   @override

@@ -30,28 +30,20 @@ class GoogleLoginWidget extends StatelessWidget {
                   .checkIfOnBoarded(result['user'].uid)
                   .then((value) async {
                 if (value) {
+                  // TODO: Implement Fetch Fail
                   await context
                       .read<UserProvider>()
                       .fetchAndAssignCurrentUser(result['user'].uid)
                       .then((value) {
                     Navigator.of(context).pop();
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                      ),
-                    );
+                    Navigator.of(context)
+                        .pushReplacementNamed(HomeScreen.routeName);
                   });
                 } else {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ChangeNotifierProvider(
-                        create: (context) => OnBoardingProvider(),
-                        child: OnBoardingScreen(
-                          uid: result['user'].uid,
-                        ),
-                      ),
-                    ),
+                  Navigator.of(context).pushNamed(
+                    OnBoardingScreen.routeName,
+                    arguments: result['user'].uid,
                   );
                 }
               });

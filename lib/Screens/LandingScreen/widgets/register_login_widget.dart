@@ -38,12 +38,7 @@ class RegisterLoginWidget extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RegisterScreen(),
-                  ),
-                );
+                Navigator.of(context).pushNamed(RegisterScreen.routeName);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 80, 163, 246),
@@ -65,12 +60,7 @@ class RegisterLoginWidget extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ),
-                  );
+                  Navigator.of(context).pushNamed(LoginScreen.routeName);
                 },
                 child: const FittedBox(
                   fit: BoxFit.fitWidth,

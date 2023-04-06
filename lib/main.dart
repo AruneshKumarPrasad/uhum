@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:uhum/Provider/Global/user_provider.dart';
+import 'package:uhum/Barrel/app_barrel.dart';
 import 'package:uhum/Screens/SplashScreen/spash_screen.dart';
 
 Future<void> main() async {
@@ -29,7 +27,19 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           primarySwatch: Colors.blue,
         ),
-        home: const SplashScreen(),
+        routes: {
+          SplashScreen.routeName: (context) => SplashScreen(),
+          HomeScreen.routeName: (context) => HomeScreen(),
+          LandingScreen.routeName: (context) => LandingScreen(),
+          OnBoardingScreen.routeName: (context) => ChangeNotifierProvider(
+                create: (context) => OnBoardingProvider(),
+                child: OnBoardingScreen(
+                  uid: ModalRoute.of(context)!.settings.arguments as String,
+                ),
+              ),
+          RegisterScreen.routeName: (context) => RegisterScreen(),
+          LoginScreen.routeName: (context) => LoginScreen(),
+        },
       ),
     );
   }

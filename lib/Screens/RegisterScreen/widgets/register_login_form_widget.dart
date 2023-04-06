@@ -156,16 +156,14 @@ class RegisterLoginFormWidget extends StatelessWidget {
                                 ),
                               );
                             } else {
+                              // TODO: Implement Fetch Fail
                               await context
                                   .read<UserProvider>()
                                   .fetchAndAssignCurrentUser(value['user'].uid)
                                   .then((value) {
                                 Navigator.of(context).pop();
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => HomeScreen(),
-                                  ),
-                                );
+                                Navigator.of(context)
+                                    .pushReplacementNamed(HomeScreen.routeName);
                               });
                             }
                           });
@@ -189,20 +187,11 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               _passwordController.text)
                           .then((value) {
                         if (value['error'] == null) {
-                          context
-                              .read<UserProvider>()
-                              .updateCurrentUser(value['user']!);
                           final resultUser = value['user']! as User;
                           Navigator.pop(context);
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => ChangeNotifierProvider(
-                                create: (context) => OnBoardingProvider(),
-                                child: OnBoardingScreen(
-                                  uid: resultUser.uid,
-                                ),
-                              ),
-                            ),
+                          Navigator.of(context).pushNamed(
+                            OnBoardingScreen.routeName,
+                            arguments: resultUser.uid,
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -252,17 +241,11 @@ class RegisterLoginFormWidget extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     if (isLogin) {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterScreen(),
-                        ),
-                      );
+                      Navigator.of(context)
+                          .pushReplacementNamed(RegisterScreen.routeName);
                     } else {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                      );
+                      Navigator.of(context)
+                          .pushReplacementNamed(LoginScreen.routeName);
                     }
                   },
                   child: Text(

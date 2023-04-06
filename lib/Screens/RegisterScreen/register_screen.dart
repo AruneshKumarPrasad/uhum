@@ -1,6 +1,7 @@
 import '../../Barrel/app_barrel.dart';
 
 class RegisterScreen extends StatefulWidget {
+  static const String routeName = "/RegisterScreen";
   const RegisterScreen({super.key});
 
   @override
