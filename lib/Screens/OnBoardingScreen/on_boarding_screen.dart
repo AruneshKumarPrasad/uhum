@@ -162,11 +162,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                                 await context
                                     .read<UserProvider>()
                                     .fetchAndAssignCurrentUser(provider.uid)
-                                    .then((_) {
+                                    .then((value) {
+                                  if (value == 'error') {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        duration:
+                                            const Duration(milliseconds: 1200),
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text(value!),
+                                      ),
+                                    );
+                                    Navigator.pop(context);
+                                  } else {
+                                    Navigator.of(context).pushReplacementNamed(
+                                      HomeScreen.routeName,
+                                    );
+                                  }
+
                                   // TODO: Implement Fetch Fail
-                                  Navigator.of(context).pushReplacementNamed(
-                                    HomeScreen.routeName,
-                                  );
                                 });
                               }
                             });

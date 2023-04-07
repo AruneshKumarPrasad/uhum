@@ -35,9 +35,19 @@ class GoogleLoginWidget extends StatelessWidget {
                       .read<UserProvider>()
                       .fetchAndAssignCurrentUser(result['user'].uid)
                       .then((value) {
-                    Navigator.of(context).pop();
-                    Navigator.of(context)
-                        .pushReplacementNamed(HomeScreen.routeName);
+                    if (value == 'error') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: const Duration(milliseconds: 1200),
+                          behavior: SnackBarBehavior.floating,
+                          content: Text(value!),
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pop();
+                      Navigator.of(context)
+                          .pushReplacementNamed(HomeScreen.routeName);
+                    }
                   });
                 } else {
                   Navigator.of(context).pop();

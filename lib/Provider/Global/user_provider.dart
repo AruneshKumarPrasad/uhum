@@ -14,8 +14,16 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchAndAssignCurrentUser(String uid) async {
+  Future<String?> fetchAndAssignCurrentUser(String uid) async {
     _currentUser = await UserServices.instance.getUserFromFireStore(uid);
-    notifyListeners();
+
+    if (_currentUser == null) {
+      notifyListeners();
+
+      return 'error';
+    } else {
+      notifyListeners();
+      return null;
+    }
   }
 }

@@ -26,10 +26,22 @@ class _SplashScreenState extends State<SplashScreen>
               await context
                   .read<UserProvider>()
                   .fetchAndAssignCurrentUser(resultUID)
-                  .then((_) {
+                  .then((value) {
+                if (value == 'error') {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(milliseconds: 1200),
+                      behavior: SnackBarBehavior.floating,
+                      content: Text(value!),
+                    ),
+                  );
+                  Navigator.of(context)
+                      .pushReplacementNamed(LandingScreen.routeName);
+                } else {
+                  Navigator.of(context)
+                      .pushReplacementNamed(HomeScreen.routeName);
+                }
                 // TODO: Implement Fetch Fail
-                Navigator.of(context)
-                    .pushReplacementNamed(HomeScreen.routeName);
               });
             } else {
               Navigator.of(context)
