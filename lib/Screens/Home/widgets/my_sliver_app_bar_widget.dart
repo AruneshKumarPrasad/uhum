@@ -52,10 +52,8 @@ class MySliverAppBarWidget extends StatelessWidget {
                     );
                     await Future.delayed(Duration(seconds: 2));
                     await UserServices.instance.signOut().then(
-                          (value) => Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => LandingScreen(),
-                            ),
+                          (value) => Navigator.of(context).pushReplacementNamed(
+                            LandingScreen.routeName,
                           ),
                         );
                   },

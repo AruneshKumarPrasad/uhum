@@ -164,10 +164,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                                     .fetchAndAssignCurrentUser(provider.uid)
                                     .then((_) {
                                   // TODO: Implement Fetch Fail
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => HomeScreen(),
-                                    ),
+                                  Navigator.of(context).pushReplacementNamed(
+                                    HomeScreen.routeName,
                                   );
                                 });
                               }

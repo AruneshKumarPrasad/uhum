@@ -79,11 +79,8 @@ class PermissionScreen extends StatelessWidget {
                                 width: mediaProp.width * 0.7,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomeScreen(),
-                                      ),
+                                    Navigator.of(context).pushNamed(
+                                      HomeScreen.routeName,
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(

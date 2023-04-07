@@ -145,15 +145,9 @@ class RegisterLoginFormWidget extends StatelessWidget {
                               .then((valueBool) async {
                             Navigator.pop(context);
                             if (!valueBool) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => ChangeNotifierProvider(
-                                    create: (context) => OnBoardingProvider(),
-                                    child: OnBoardingScreen(
-                                      uid: resultUser.uid,
-                                    ),
-                                  ),
-                                ),
+                              Navigator.of(context).pushNamed(
+                                OnBoardingScreen.routeName,
+                                arguments: resultUser.uid,
                               );
                             } else {
                               // TODO: Implement Fetch Fail
