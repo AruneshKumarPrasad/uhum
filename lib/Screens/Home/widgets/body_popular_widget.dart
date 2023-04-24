@@ -10,7 +10,7 @@ class BodyPopularWidget extends StatefulWidget {
   final Size mediaProp;
 
   @override
-  _BodyPopularWidgetState createState() => _BodyPopularWidgetState();
+  State<BodyPopularWidget> createState() => _BodyPopularWidgetState();
 }
 
 class _BodyPopularWidgetState extends State<BodyPopularWidget> {
@@ -62,7 +62,7 @@ class _BodyPopularWidgetState extends State<BodyPopularWidget> {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20,
         ),
         height: widget.mediaProp.height * 0.2,
@@ -74,14 +74,14 @@ class _BodyPopularWidgetState extends State<BodyPopularWidget> {
             Text(
               "Popular",
               style: GoogleFonts.poppins(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               height: widget.mediaProp.height * 0.125,
               width: double.maxFinite,
               child: Stack(
@@ -93,7 +93,7 @@ class _BodyPopularWidgetState extends State<BodyPopularWidget> {
                     itemBuilder: (context, index) => Container(
                       height: widget.mediaProp.height * 0.125,
                       width: widget.mediaProp.height * 0.2,
-                      margin: EdgeInsets.symmetric(
+                      margin: const EdgeInsets.symmetric(
                         horizontal: 6,
                       ),
                       decoration: BoxDecoration(

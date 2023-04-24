@@ -11,7 +11,7 @@ class GoToWidget extends StatefulWidget {
   final Size mediaProp;
 
   @override
-  _GoToWidgetState createState() => _GoToWidgetState();
+  State<GoToWidget> createState() => _GoToWidgetState();
 }
 
 class _GoToWidgetState extends State<GoToWidget> {
@@ -70,7 +70,7 @@ class _GoToWidgetState extends State<GoToWidget> {
     final currentUser = Provider.of<UserProvider>(context).currentUser!;
     return SliverToBoxAdapter(
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20,
         ),
         height: widget.mediaProp.height * 0.23,
@@ -84,7 +84,7 @@ class _GoToWidgetState extends State<GoToWidget> {
                 Text(
                   "${timeBasedGreeting()}! ",
                   style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -93,7 +93,7 @@ class _GoToWidgetState extends State<GoToWidget> {
                 Text(
                   currentUser.firstName,
                   style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),
@@ -102,7 +102,7 @@ class _GoToWidgetState extends State<GoToWidget> {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               height: widget.mediaProp.height * 0.15,
               width: double.maxFinite,
               child: Stack(
@@ -114,7 +114,7 @@ class _GoToWidgetState extends State<GoToWidget> {
                     itemBuilder: (context, index) => Container(
                       height: widget.mediaProp.height * 0.15,
                       width: widget.mediaProp.height * 0.225,
-                      margin: EdgeInsets.symmetric(
+                      margin: const EdgeInsets.symmetric(
                         horizontal: 6,
                       ),
                       decoration: BoxDecoration(
@@ -133,7 +133,7 @@ class _GoToWidgetState extends State<GoToWidget> {
                         ),
                         child: Text(
                           _holder[index]['title']!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,

@@ -21,8 +21,8 @@ class MySliverAppBarWidget extends StatelessWidget {
         minHeight: mediaProp.height * 0.3,
         maxHeight: mediaProp.height * 0.3,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(25.0),
               bottomRight: Radius.circular(25.0),
             ),
@@ -37,7 +37,7 @@ class MySliverAppBarWidget extends StatelessWidget {
                 top: MediaQuery.of(context).padding.top,
                 right: 8,
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.logout,
                     color: Colors.white,
                   ),
@@ -50,7 +50,7 @@ class MySliverAppBarWidget extends StatelessWidget {
                         mediaProp: mediaProp,
                       ),
                     );
-                    await Future.delayed(Duration(seconds: 2));
+                    await Future.delayed(const Duration(seconds: 2));
                     await UserServices.instance.signOut().then(
                           (value) => Navigator.of(context).pushReplacementNamed(
                             LandingScreen.routeName,
@@ -69,7 +69,7 @@ class MySliverAppBarWidget extends StatelessWidget {
                       'Keep seeking whatever',
                       textAlign: TextAlign.start,
                       style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -80,7 +80,7 @@ class MySliverAppBarWidget extends StatelessWidget {
                       'matters to you',
                       textAlign: TextAlign.start,
                       style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -88,10 +88,10 @@ class MySliverAppBarWidget extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 10),
+                      margin: const EdgeInsets.only(top: 10),
                       height: mediaProp.height * 0.04,
                       width: mediaProp.width * 0.2,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 4,
                       ),
                       decoration: BoxDecoration(
@@ -110,7 +110,7 @@ class MySliverAppBarWidget extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             'Read More',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                           ),

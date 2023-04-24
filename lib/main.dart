@@ -26,17 +26,17 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
-          SplashScreen.routeName: (context) => SplashScreen(),
-          HomeScreen.routeName: (context) => HomeScreen(),
-          LandingScreen.routeName: (context) => LandingScreen(),
+          SplashScreen.routeName: (context) => const SplashScreen(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
+          LandingScreen.routeName: (context) => const LandingScreen(),
           OnBoardingScreen.routeName: (context) => ChangeNotifierProvider(
                 create: (context) => OnBoardingProvider(),
                 child: OnBoardingScreen(
                   uid: ModalRoute.of(context)!.settings.arguments as String,
                 ),
               ),
-          RegisterScreen.routeName: (context) => RegisterScreen(),
-          LoginScreen.routeName: (context) => LoginScreen(),
+          RegisterScreen.routeName: (context) => const RegisterScreen(),
+          LoginScreen.routeName: (context) => const LoginScreen(),
         },
       ),
     );

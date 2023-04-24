@@ -41,7 +41,6 @@ class _SplashScreenState extends State<SplashScreen>
                   Navigator.of(context)
                       .pushReplacementNamed(HomeScreen.routeName);
                 }
-                // TODO: Implement Fetch Fail
               });
             } else {
               Navigator.of(context)

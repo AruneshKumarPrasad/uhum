@@ -81,7 +81,9 @@ class UserServices {
   ) async {
     try {
       await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       final String uID = _auth.currentUser!.uid;
       _saveUserId(uID);
       await FirebaseFirestore.instance

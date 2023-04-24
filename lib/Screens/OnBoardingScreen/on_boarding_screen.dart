@@ -178,8 +178,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                                       HomeScreen.routeName,
                                     );
                                   }
-
-                                  // TODO: Implement Fetch Fail
                                 });
                               }
                             });

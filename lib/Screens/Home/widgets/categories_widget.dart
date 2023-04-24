@@ -9,7 +9,7 @@ class CategoriesWidget extends StatefulWidget {
   final Size mediaProp;
 
   @override
-  _CategoriesWidgetState createState() => _CategoriesWidgetState();
+  State<CategoriesWidget> createState() => _CategoriesWidgetState();
 }
 
 class _CategoriesWidgetState extends State<CategoriesWidget> {
@@ -17,7 +17,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
   double _leftGradientOpacity = 0.0;
   double _rightGradientOpacity = 1.0;
 
-  List<String> _holder = [
+  final List<String> _holder = [
     'Fitness and health',
     'Upgrade your life',
     'Daily reflection',
@@ -43,7 +43,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20,
         ),
         height: widget.mediaProp.height * 0.06,
@@ -56,13 +56,13 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => Container(
                 height: widget.mediaProp.height * 0.06,
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black26,
                       blurRadius: 4,
@@ -72,7 +72,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                 alignment: Alignment.center,
                 child: Text(
                   _holder[index],
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                   ),

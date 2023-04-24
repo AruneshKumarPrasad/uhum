@@ -20,9 +20,9 @@ class LogoutLoaderWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Signing you out",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 26,
               color: Colors.black,
               fontWeight: FontWeight.bold,
