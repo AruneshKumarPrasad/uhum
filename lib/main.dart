@@ -1,6 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:uhum/Barrel/app_barrel.dart';
-import 'package:uhum/Screens/SplashScreen/spash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

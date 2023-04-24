@@ -3,6 +3,7 @@ export 'dart:io';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:firebase_auth/firebase_auth.dart';
+export 'package:firebase_core/firebase_core.dart';
 export 'package:firebase_storage/firebase_storage.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,3 +23,4 @@ export 'package:uhum/Screens/OnBoardingScreen/on_boarding_screen.dart';
 export 'package:uhum/Screens/RegisterScreen/register_screen.dart';
 export 'package:uhum/Screens/RegisterScreen/widgets/register_login_form_widget.dart';
 export 'package:uhum/Screens/RegisterScreen/widgets/social_login_widget.dart';
+export 'package:uhum/Screens/SplashScreen/splash_screen.dart';

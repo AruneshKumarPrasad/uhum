@@ -1,6 +1,5 @@
-import 'package:uhum/Screens/OnBoardingScreen/widgets/register_loader_widget.dart';
-
 import '../../../Barrel/app_barrel.dart';
+import '../../OnBoardingScreen/widgets/register_loader_widget.dart';
 
 class GoogleLoginWidget extends StatelessWidget {
   const GoogleLoginWidget({

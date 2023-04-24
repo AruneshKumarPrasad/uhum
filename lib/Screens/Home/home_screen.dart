@@ -1,17 +1,18 @@
-import 'package:uhum/Screens/Home/Fragments/meditation_page_fragment.dart';
-
 import '../../Barrel/app_barrel.dart';
 import 'Fragments/home_page_fragment.dart';
+import 'Fragments/meditation_page_fragment.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/HomeScreen';
+
+  const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentPageIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   onPageChange(int index) {
     setState(() {
@@ -38,12 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
           onDestinationSelected: (int index) {
             _pageController.animateToPage(
               index,
-              duration: Duration(milliseconds: 250),
+              duration: const Duration(milliseconds: 250),
               curve: Curves.linear,
             );
           },
           selectedIndex: currentPageIndex,
-          destinations: [
+          destinations: const [
             NavigationDestination(
               selectedIcon: Icon(Icons.house_rounded),
               icon: Icon(Icons.house_outlined),
