@@ -1,5 +1,3 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:uhum/Barrel/app_barrel.dart';
 
 class AudioPlayerScreen extends StatelessWidget {
@@ -69,7 +67,7 @@ class AudioPlayerScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
+              const Text(
                 "Cool Vibes",
                 style: TextStyle(
                   fontSize: 40,

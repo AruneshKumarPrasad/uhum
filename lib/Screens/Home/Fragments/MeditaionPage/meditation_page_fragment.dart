@@ -43,9 +43,78 @@ class _MeditationPageFragmentState extends State<MeditationPageFragment> {
                   padding: const EdgeInsets.all(4),
                   child: Container(
                     height: mediaProp.height * 0.25,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFCBECFF),
                       borderRadius: BorderRadius.circular(25 - 4),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: mediaProp.height * 0.2,
+                          width: mediaProp.width * 0.4,
+                          child: Image.asset(
+                            'assets/Meditation/Meditation.png',
+                            fit: BoxFit.contain,
+                            filterQuality: FilterQuality.high,
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Did you know?",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            SizedBox(
+                              width: mediaProp.width * 0.4,
+                              child: const Text(
+                                  "body here - body here - body here - body here - body here - body here - body here - body here"),
+                            ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  height: mediaProp.height * 0.045,
+                                  width: mediaProp.width * 0.4,
+                                  padding: const EdgeInsets.all(8),
+                                  color: Colors.white,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: const [
+                                      CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromRGBO(203, 234, 255, 1),
+                                        child: FittedBox(
+                                          fit: BoxFit.contain,
+                                          child: Icon(
+                                            Icons.play_arrow,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      FittedBox(
+                                        fit: BoxFit.fitWidth,
+                                        child: Text("Start Listening"),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
                 ),
