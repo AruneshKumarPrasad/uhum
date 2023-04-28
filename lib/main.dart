@@ -1,4 +1,5 @@
 import 'package:uhum/Barrel/app_barrel.dart';
+import 'package:uhum/Screens/AudioPlayerScreen/audio_player_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,16 @@ class MyApp extends StatelessWidget {
               ),
           RegisterScreen.routeName: (context) => const RegisterScreen(),
           LoginScreen.routeName: (context) => const LoginScreen(),
+          TracksScreen.routeName: (context) => TracksScreen(
+                meditationCategory: ModalRoute.of(context)!.settings.arguments
+                    as MeditationCategory,
+              ),
+          AudioPlayerScreen.routeName: (context) => AudioPlayerScreen(
+                meditationCategory: (ModalRoute.of(context)!.settings.arguments
+                    as List<dynamic>)[0],
+                meditation: (ModalRoute.of(context)!.settings.arguments
+                    as List<dynamic>)[1],
+              ),
         },
       ),
     );

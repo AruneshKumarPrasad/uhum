@@ -16,30 +16,28 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     final Size mediaProp = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: Background(mediaProp: mediaProp, child: [
-          Positioned(
-            top: 0,
-            bottom: mediaProp.height * 0.23,
-            left: 0,
-            right: 0,
-            child: LandingPageViewWidget(
-              controller: _controller,
-              mediaProp: mediaProp,
-            ),
+    return Scaffold(
+      body: Background(mediaProp: mediaProp, child: [
+        Positioned(
+          top: 0,
+          bottom: mediaProp.height * 0.23,
+          left: 0,
+          right: 0,
+          child: LandingPageViewWidget(
+            controller: _controller,
+            mediaProp: mediaProp,
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: RegisterLoginWidget(
-              mediaProp: mediaProp,
-              controller: _controller,
-            ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: RegisterLoginWidget(
+            mediaProp: mediaProp,
+            controller: _controller,
           ),
-        ]),
-      ),
+        ),
+      ]),
     );
   }
 }
