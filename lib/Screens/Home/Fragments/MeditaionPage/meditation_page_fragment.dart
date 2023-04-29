@@ -24,7 +24,6 @@ class _MeditationPageFragmentState extends State<MeditationPageFragment> {
         horizontal: 12,
       ),
       child: ListView(
-        physics: const BouncingScrollPhysics(),
         children: [
           SizedBox(
             height: mediaProp.height * 0.3,
@@ -42,7 +41,7 @@ class _MeditationPageFragmentState extends State<MeditationPageFragment> {
                   slectedColor: const Color(0xFFCBECFF),
                   padding: const EdgeInsets.all(4),
                   child: Container(
-                    height: mediaProp.height * 0.25,
+                    height: mediaProp.height * 0.25 - 4,
                     padding: const EdgeInsets.symmetric(
                       vertical: 20,
                     ),
