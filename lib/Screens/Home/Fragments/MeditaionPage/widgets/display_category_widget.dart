@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:uhum/Screens/Home/Fragments/MeditaionPage/widgets/display_card_widget.dart';
-
+import 'display_card_widget.dart';
 import '../../../../../Barrel/app_barrel.dart';
 
 class DisplayCatgoryWidget extends StatelessWidget {

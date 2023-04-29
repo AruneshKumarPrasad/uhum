@@ -1,5 +1,4 @@
 import 'package:uhum/Barrel/app_barrel.dart';
-import 'package:uhum/Screens/AudioPlayerScreen/audio_player_screen.dart';
 
 class TracksScreen extends StatelessWidget {
   const TracksScreen({super.key, required this.meditationCategory});
@@ -27,28 +26,25 @@ class TracksScreen extends StatelessWidget {
               itemCount: meditationsList.length,
               itemBuilder: (context, index) {
                 Meditation meditation = meditationsList[index];
-                return GestureDetector(
+                return ListTile(
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(AudioPlayerScreen.routeName, arguments: [
-                      meditationCategory,
-                      meditation,
-                    ]);
+                    Navigator.of(context).pushNamed(
+                      AudioPlayerScreen.routeName,
+                      arguments: meditation,
+                    );
                   },
-                  child: ListTile(
-                    leading: Container(
-                      height: 55,
-                      width: 55,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(meditation.imageUrl),
-                        ),
+                  leading: Container(
+                    height: 55,
+                    width: 55,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(meditation.imageUrl),
                       ),
                     ),
-                    title: Text(meditation.title),
-                    subtitle: Text(meditation.description),
                   ),
+                  title: Text(meditation.title),
+                  subtitle: Text(meditation.description),
                 );
               },
             );

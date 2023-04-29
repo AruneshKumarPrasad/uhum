@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import '../Barrel/app_barrel.dart';
 
 /// This class provides various services related to meditation, such as

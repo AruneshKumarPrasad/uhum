@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:uhum/Screens/Home/Fragments/MeditaionPage/widgets/display_card_widget.dart';
-
+import 'display_card_widget.dart';
 import '../../../../../Barrel/app_barrel.dart';
 
 class DisplayTrackWidget extends StatelessWidget {
@@ -17,12 +15,18 @@ class DisplayTrackWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        String? url = await meditationServices.getFileUrl('EmptyMind.mp3');
-        print(url);
+        // String? url = await meditationServices.getFileUrl('EmptyMind.mp3');
+        // print(url);
+
         // await meditationServices
         //     .addMeditationTrackToRecommended(
         //   meditation: meditation,
         // );
+
+        Navigator.of(context).pushNamed(
+          AudioPlayerScreen.routeName,
+          arguments: meditation,
+        );
       },
       child: DisplayCardWidget(
         slectedColor: Colors.black54,

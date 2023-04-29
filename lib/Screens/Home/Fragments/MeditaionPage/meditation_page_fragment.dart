@@ -82,7 +82,11 @@ class _MeditationPageFragmentState extends State<MeditationPageFragment> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  if (kDebugMode) {
+                                    print("Start Listening tapped!");
+                                  }
+                                },
                                 child: Container(
                                   height: mediaProp.height * 0.045,
                                   width: mediaProp.width * 0.4,

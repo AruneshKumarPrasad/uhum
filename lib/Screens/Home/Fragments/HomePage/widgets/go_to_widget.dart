@@ -1,5 +1,3 @@
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../Barrel/app_barrel.dart';
 
 class GoToWidget extends StatefulWidget {

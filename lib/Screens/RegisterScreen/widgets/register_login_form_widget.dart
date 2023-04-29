@@ -150,7 +150,6 @@ class RegisterLoginFormWidget extends StatelessWidget {
                                 arguments: resultUser.uid,
                               );
                             } else {
-                              // TODO: Implement Fetch Fail
                               await context
                                   .read<UserProvider>()
                                   .fetchAndAssignCurrentUser(value['user'].uid)

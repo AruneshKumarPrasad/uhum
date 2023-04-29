@@ -1,8 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:uhum/Constants/global_colors.dart';
-
 import '../../Barrel/app_barrel.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -58,33 +53,6 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // _animationController = AnimationController(
-  //   //   vsync: this,
-  //   //   duration: const Duration(seconds: 1),
-  //   // );
-  //   // _slideAnimation = Tween<Offset>(
-  //   //   begin: const Offset(0, -0.1),
-  //   //   end: const Offset(0, 0),
-  //   // ).animate(_animationController);
-  //   // _animationController.addStatusListener((status) {
-  //   //   if (status == AnimationStatus.completed) {
-  //   //     reDirector();
-  //   //   } else if (status == AnimationStatus.dismissed) {
-  //   //     _animationController.forward();
-  //   //   }
-  //   // });
-  //   // _animationController.forward();
-  // }
-
-  // @override
-  // void dispose() {
-  //   _animationController.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {

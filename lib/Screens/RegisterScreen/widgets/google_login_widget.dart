@@ -29,7 +29,6 @@ class GoogleLoginWidget extends StatelessWidget {
                   .checkIfOnBoarded(result['user'].uid)
                   .then((value) async {
                 if (value) {
-                  // TODO: Implement Fetch Fail
                   await context
                       .read<UserProvider>()
                       .fetchAndAssignCurrentUser(result['user'].uid)
