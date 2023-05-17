@@ -44,7 +44,7 @@ class ProfileDoneFragment extends StatelessWidget {
                 ),
               ),
               Container(
-                height: mediaProp.height * 0.55,
+                height: mediaProp.height * 0.5,
                 alignment: Alignment.center,
                 child: Lottie.asset('assets/OnBoarding/Done.json'),
               ),

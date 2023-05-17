@@ -43,7 +43,7 @@ class ProfilePhotoFragment extends StatelessWidget {
                   horizontal: 24,
                 ),
                 alignment: Alignment.center,
-                height: mediaProp.height * 0.6,
+                height: mediaProp.height * 0.5,
                 child: ProfileImagePickerWidget(mediaProp: mediaProp),
               ),
             ],

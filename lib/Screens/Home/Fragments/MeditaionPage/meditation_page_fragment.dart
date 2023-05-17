@@ -73,10 +73,16 @@ class _MeditationPageFragmentState extends State<MeditationPageFragment> {
                                 fontSize: 18,
                               ),
                             ),
-                            SizedBox(
+                            Container(
+                              height: mediaProp.height * 0.12,
                               width: mediaProp.width * 0.4,
+                              padding: EdgeInsets.only(
+                                bottom: mediaProp.height * 0.005,
+                              ),
                               child: const Text(
-                                  "body here - body here - body here - body here - body here - body here - body here - body here"),
+                                "body here - body here - body here - body here - body here - body here - body here - body here - body here - body here - body here - body here - body here - body here - body here - body here - body here - body here",
+                                overflow: TextOverflow.fade,
+                              ),
                             ),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15),
